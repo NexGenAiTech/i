@@ -396,6 +396,49 @@
             font-size: 1rem;
             letter-spacing: 1px;
             box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .footer-top {
+            margin-bottom: 10px;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            color: #00ffff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        .contact-link:hover {
+            color: #ffcc00;
+            text-decoration: underline;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            color: #00ffff;
+            font-size: 1.3rem;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: #ffcc00;
+            transform: translateY(-3px);
         }
 
         .glow {
@@ -499,6 +542,11 @@
             .mode-btn {
                 padding: 12px 20px;
                 font-size: 0.95rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 10px;
             }
         }
 
@@ -613,8 +661,19 @@
             </div>
         </div>
         
+        <!-- Updated Footer with Contact Us and Social Media -->
         <div class="footer">
-            <p>Premium Gaming Experience | Unbeatable AI |  Made By NexGenAiTech with <i class="fas fa-heart"></i></p>
+            <div class="footer-top">
+                <p>Premium Gaming Experience | Unbeatable AI | Made By NexGenAiTech with <i class="fas fa-heart"></i></p>
+            </div>
+            <div class="footer-bottom">
+                <a href="mailto:contact@nexgenaitech.com" class="contact-link">Contact Us</a>
+                <div class="social-icons">
+                    <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
         </div>
     </div>
     
