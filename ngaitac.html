@@ -1,3 +1,5 @@
+
+            
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,8 +66,8 @@
             text-transform: uppercase;
             letter-spacing: 3px;
             margin-bottom: 10px;
-            color: #ffcc00;
-            text-shadow: 0 0 15px rgba(255, 204, 0, 0.8);
+            color: #a2dd21;
+            text-shadow: 0 0 15px rgba(42, 88, 131, 0.8);
             font-weight: 900;
         }
 
@@ -104,7 +106,7 @@
         }
 
         .mode-btn.active {
-            background: linear-gradient(to right, #ffcc00, #ff9900);
+            background: linear-gradient(to right, #066590, #ff9900);
             transform: translateY(-3px);
             box-shadow: 0 6px 20px rgba(255, 204, 0, 0.6);
         }
@@ -669,9 +671,9 @@
             <div class="footer-bottom">
                 <a href="mailto:contact@nexgenaitech.com" class="contact-link">Contact Us</a>
                 <div class="social-icons">
-                    <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                    <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://shorturl.at/KfFTv" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://shorturl.at/keN9O" title="github"><i class="fab fa-github"></i></a>
+                    <a href="https://shorturl.at/keN9O" title="Instagram"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
         </div>
@@ -735,6 +737,13 @@
                     player1Name = player1NameInput.value || 'Player 1';
                     updateStatus();
                     showNotification(`Player 1 name set to: ${player1Name}`);
+                });
+                
+                // FIXED: Add event listener for Player 2 save button
+                document.getElementById('player2-btn').addEventListener('click', () => {
+                    player2Name = player2NameInput.value || 'Player 2';
+                    updateStatus();
+                    showNotification(`Player 2 name set to: ${player2Name}`);
                 });
                 
                 // Game mode selection
@@ -1122,5 +1131,43 @@
             }
         });
     </script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
 </body>
 </html>
