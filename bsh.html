@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bombay Shut House | Premium Tailoring</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --gold-light: #E6C567;
+            --black: #121212;
+            --dark-gray: #1E1E1E;
+            --white: #FFFFFF;
+            --light-gray: #F5F5F5;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.05) 0%, rgba(212, 175, 55, 0) 20%),
+                radial-gradient(circle at 90% 80%, rgba(212, 175, 55, 0.05) 0%, rgba(212, 175, 55, 0) 20%);
+            min-height: 100vh;
+        }
+        
+        body.light-mode {
+            background-color: var(--light-gray);
+            color: var(--black);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.03) 0%, rgba(212, 175, 55, 0) 20%),
+                radial-gradient(circle at 90% 80%, rgba(212, 175, 55, 0.03) 0%, rgba(212, 175, 55, 0) 20%);
+        }
+        
+        /* Glassmorphism effect */
+        .glass {
+            background: rgba(30, 30, 30, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
+            border-radius: 10px;
+        }
+        
+        body.light-mode .glass {
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: var(--white);
+        }
+        
+        body.light-mode .logo span {
+            color: var(--black);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+        }
+        
+        body.light-mode nav a {
+            color: var(--black);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: var(--transition);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-icons {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        
+        .theme-toggle {
+            background: transparent;
+            border: none;
+            color: var(--white);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        body.light-mode .theme-toggle {
+            color: var(--black);
+        }
+        
+        .cart-icon {
+            position: relative;
+            color: var(--white);
+            font-size: 1.3rem;
+        }
+        
+        body.light-mode .cart-icon {
+            color: var(--black);
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--gold);
+            color: var(--black);
+            font-size: 0.7rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+        }
+        
+        body.light-mode .mobile-menu-btn {
+            color: var(--black);
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            max-width: 650px;
+            z-index: 10;
+            position: relative;
+        }
+        
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 1s forwards 0.3s;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 1s forwards 0.6s;
+        }
+        
+        .cta-btn {
+            background: var(--gold);
+            color: var(--black);
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 1s forwards 0.9s;
+        }
+        
+        .cta-btn:hover {
+            background: var(--gold-light);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+        }
+        
+        .hero-image {
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 45%;
+            max-width: 700px;
+            opacity: 0;
+            animation: fadeIn 1s forwards 1.2s;
+        }
+        
+        /* Floating Elements Animation */
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.1);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+            animation: float 25s infinite linear;
+            z-index: 1;
+        }
+        
+        .floating-element:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: 5%;
+            animation-duration: 40s;
+        }
+        
+        .floating-element:nth-child(2) {
+            width: 180px;
+            height: 180px;
+            top: 60%;
+            left: 20%;
+            animation-duration: 30s;
+            animation-delay: -10s;
+        }
+        
+        .floating-element:nth-child(3) {
+            width: 220px;
+            height: 220px;
+            top: 30%;
+            right: 15%;
+            animation-duration: 35s;
+            animation-delay: -5s;
+        }
+        
+        /* Sections */
+        .section {
+            padding: 8rem 5%;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 3px;
+            background: var(--gold);
+        }
+        
+        /* Product Showcase */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+        
+        .product-card {
+            background: rgba(30, 30, 30, 0.4);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: var(--transition);
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        body.light-mode .product-card {
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 300px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--gold);
+            color: var(--black);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .product-wishlist {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(30, 30, 30, 0.7);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .product-wishlist:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+        }
+        
+        .product-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .current-price {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--gold);
+        }
+        
+        .original-price {
+            font-size: 0.9rem;
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+        
+        .product-actions {
+            display: flex;
+            gap: 0.8rem;
+        }
+        
+        .btn {
+            flex: 1;
+            padding: 0.6rem;
+            border-radius: 4px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            border: none;
+        }
+        
+        .btn-primary {
+            background: var(--gold);
+            color: var(--black);
+        }
+        
+        .btn-primary:hover {
+            background: var(--gold-light);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+        
+        /* WhatsApp Float Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+            transition: var(--transition);
+            animation: pulse 2s infinite;
+        }
+        
+        .whatsapp-float:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+        }
+        
+        /* Features Section */
+        .features {
+            background: var(--dark-gray);
+            position: relative;
+        }
+        
+        body.light-mode .features {
+            background: var(--light-gray);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 10px;
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-title {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-desc {
+            opacity: 0.8;
+            line-height: 1.7;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark-gray);
+            padding: 5rem 5% 2rem;
+            position: relative;
+        }
+        
+        body.light-mode footer {
+            background: #e0e0e0;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-col h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--gold);
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-col a {
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+            opacity: 0.8;
+        }
+        
+        body.light-mode .footer-col a {
+            color: var(--black);
+        }
+        
+        .footer-col a:hover {
+            opacity: 1;
+            color: var(--gold);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        body.light-mode .copyright {
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Modal Styles - OPTIMIZED FOR HEIGHT */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            overflow-y: auto;
+        }
+        
+        .modal-content {
+            width: 90%;
+            max-width: 900px;
+            background: var(--dark-gray);
+            border-radius: 10px;
+            padding: 1.5rem;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        
+        body.light-mode .modal-content {
+            background: var(--light-gray);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--gold);
+            transition: var(--transition);
+        }
+        
+        .close-modal:hover {
+            transform: rotate(90deg);
+        }
+        
+        .modal-top {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        
+        .modal-images {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+        }
+        
+        .modal-images img {
+            width: 100%;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .modal-images img:hover, .modal-images img.active {
+            border: 2px solid var(--gold);
+        }
+        
+        .modal-main-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        
+        .modal-details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        
+        .modal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 0.3rem;
+        }
+        
+        .modal-price {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .modal-description {
+            line-height: 1.6;
+            opacity: 0.9;
+            font-size: 0.95rem;
+            max-height: 120px;
+            overflow-y: auto;
+        }
+        
+        .modal-specs {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.6rem;
+            margin: 0.5rem 0;
+        }
+        
+        .spec-item {
+            display: flex;
+            gap: 0.6rem;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+        
+        .spec-icon {
+            color: var(--gold);
+            font-size: 1rem;
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.8rem;
+        }
+        
+        .modal-actions .btn {
+            padding: 0.8rem 1.5rem;
+        }
+        
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .whatsapp-btn:hover {
+            background: #128C7E;
+        }
+        
+        /* Animations */
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(20px, 40px) rotate(90deg);
+            }
+            50% {
+                transform: translate(40px, 0) rotate(180deg);
+            }
+            75% {
+                transform: translate(20px, -40px) rotate(270deg);
+            }
+            100% {
+                transform: translate(0, 0) rotate(360deg);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+        
+        /* Responsive Design */
+        @media screen and (max-width: 1200px) {
+            .products-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .modal-top {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-main-image {
+                height: 250px;
+            }
+        }
+        
+        @media screen and (max-width: 992px) {
+            .hero h1 {
+                font-size: 3.2rem;
+            }
+            
+            .hero-image {
+                width: 40%;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .modal-main-image {
+                height: 220px;
+            }
+        }
+        
+        @media screen and (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                flex-direction: column;
+                background: var(--dark-gray);
+                width: 100%;
+                height: calc(100vh - 80px);
+                padding: 2rem;
+                transition: var(--transition);
+                z-index: 999;
+            }
+            
+            body.light-mode nav ul {
+                background: var(--light-gray);
+            }
+            
+            nav ul.active {
+                left: 0;
+            }
+            
+            .hero {
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+            }
+            
+            .hero-content {
+                max-width: 100%;
+            }
+            
+            .hero-image {
+                position: relative;
+                right: 0;
+                top: 0;
+                transform: none;
+                width: 100%;
+                max-width: 500px;
+                margin-top: 3rem;
+            }
+            
+            .section {
+                padding: 6rem 5%;
+            }
+            
+            .modal-main-image {
+                height: 200px;
+            }
+            
+            .modal-images {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        @media screen and (max-width: 576px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .modal-images {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .modal-actions {
+                flex-direction: column;
+            }
+            
+            .modal-main-image {
+                height: 180px;
+            }
+            
+            .modal-title {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="glass">
+        <a href="#" class="logo"> BOMBAY SHUT HOUSE</a>
+        
+        <nav>
+            <ul id="navMenu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#collection">Collection</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        
+        <div class="nav-icons">
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <a href="#" class="cart-icon">
+                <i class="fas fa-shopping-bag"></i>
+                <span class="cart-count">0</span>
+            </a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="floating-elements">
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+        </div>
+        
+        <div class="hero-content">
+            <h1>Crafting Elegance, Stitch by Stitch</h1>
+            <p>Bombay Shut House brings the legacy of bespoke tailoring to the digital age. Experience premium craftsmanship with our exclusive collection of coats, pants, and suits designed for the discerning gentleman.</p>
+            <button class="cta-btn" onclick="document.getElementById('collection').scrollIntoView({behavior: 'smooth'})">Explore Collection</button>
+        </div>
+        
+        <div class="hero-image">
+        </div>
+    </section>
+    
+    <!-- Products Section - Expanded to 10 products -->
+    <section class="section" id="collection">
+        <h2 class="section-title">Premium Collection</h2>
+        
+        <div class="products-grid">
+            <!-- Product 1 -->
+            <div class="product-card glass">
+                <div class="product-image">
+                    <img src="https://handcmediastorage.blob.core.windows.net/productimages/JK/JKCLDA912P-G01V-176276-800px-1040px.jpg" alt="Classic Navy Suit">
+                    <div class="product-badge">BEST SELLER</div>
+                    <div class="product-wishlist"><i class="far fa-heart"></i></div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Classic Navy Suit</h3>
+                    <div class="product-price">
+                        <span class="current-price">₹4,999</span>
+                        <span class="original-price">₹10,000</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn btn-secondary" onclick="openProductModal(1)">Details</button>
+                        <button class="btn btn-primary" onclick="orderViaWhatsApp('Classic Navy Suit', '₹24,999')">Order Now</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 2 -->
+            <div class="product-card glass">
+                <div class="product-image">
+                    <img src="https://images.menswearhouse.com/is/image/TMW/MWTSU20_WED_PSL_FML_1317_MAIN?$TUXPDPZOOM$" alt="Charcoal Tuxedo">
+                    <div class="product-badge">NEW</div>
+                    <div class="product-wishlist"><i class="far fa-heart"></i></div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Charcoal Tuxedo</h3>
+                    <div class="product-price">
+                        <span class="current-price">₹4,999</span>
+                        <span class="original-price">₹12,000</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn btn-secondary" onclick="openProductModal(2)">Details</button>
+                        <button class="btn btn-primary" onclick="orderViaWhatsApp('Charcoal Tuxedo', '₹29,999')">Order Now</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 3 -->
+            <div class="product-card glass">
+                <div class="product-image">
+                    <img src="https://i.etsystatic.com/33187430/r/il/7ffbb5/4021037766/il_794xN.4021037766_rmz5.jpg" alt="Linen Beige Blazer">
+                    <div class="product-wishlist"><i class="far fa-heart"></i></div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Linen Beige Blazer</h3>
+                    <div class="product-price">
+                        <span class="current-price">₹4,499</span>
+                        <span class="original-price">₹14,000</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn btn-secondary" onclick="openProductModal(3)">Details</button>
+                        <button class="btn btn-primary" onclick="orderViaWhatsApp('Linen Beige Blazer', '₹18,999')">Order Now</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 4 -->
+            <div class="product-card glass">
+                <div class="product-image">
+                    <img src="https://www.studiosuits.com/cdn/shop/files/loropianalazzarowoolsilklinenpantlook_01_1445x.jpg?v=1714207108" alt="Wool Gray Pants">
+                    <div class="product-badge">LIMITED</div>
+                    <div class="product-wishlist"><i class="far fa-heart"></i></div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Wool Gray Pants</h3>
+                    <div class="product-price">
+                        <span class="current-price">₹1,999</span>
+                        <span class="original-price">₹4,000</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn btn-secondary" onclick="openProductModal(4)">Details</button>
+                        <button class="btn btn-primary" onclick="orderViaWhatsApp('Wool Gray Pants', '₹9,999')">Order Now</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 5 -->
+            <div class="product-card glass">
+                <div class="product-image">
+                    <img src="https://th.bing.com/th/id/OIP.cuM2ctHTQg6C9ejzWjDmqwHaIv?r=0&rs=1&pid=ImgDetMain&cb=idpwebp2&o=7&rm=3" alt="Midnight Blue Tuxedo">
+                    <div class="product-badge">POPULAR</div>
+                    <div class="product-wishlist"><i class="far fa-heart"></i></div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Midnight Blue Tuxedo</h3>
+                    <div class="product-price">
+                        <span class="current-price">₹3,999</span>
+                        <span class="original-price">₹8,000</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn btn-secondary" onclick="openProductModal(5)">Details</button>
+                        <button class="btn btn-primary" onclick="orderViaWhatsApp('Midnight Blue Tuxedo', '₹31,999')">Order Now</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 6 -->
+            <div class="product-card glass">
+                <div class="product-image">
+                    <img src="https://images-na.ssl-images-amazon.com/images/I/81c0S4C81RL._AC_UX569_.jpg" alt="Cashmere Overcoat">
+                    <div class="product-badge">PREMIUM</div>
+                    <div class="product-wishlist"><i class="far fa-heart"></i></div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Cashmere Overcoat</h3>
+                    <div class="product-price">
+                        <span class="current-price">₹2,999</span>
+                        <span class="original-price">₹8,000</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn btn-secondary" onclick="openProductModal(6)">Details</button>
+                        <button class="btn btn-primary" onclick="orderViaWhatsApp('Cashmere Overcoat', '₹34,999')">Order Now</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 7 -->
+            <div class="product-card glass">
+                <div class="product-image">
+                    <img src="https://cdn.shopify.com/s/files/1/1845/0253/products/ht2_86650f9b-c449-4fd9-afaf-04f0683aab68.jpg?v=1600052674" alt="Herringbone Sport Coat">
+                    <div class="product-wishlist"><i class="far fa-heart"></i></div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Herringbone Sport Coat</h3>
+                    <div class="product-price">
+                        <span class="current-price">₹5,999</span>
+                        <span class="original-price">₹14,000</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn btn-secondary" onclick="openProductModal(7)">Details</button>
+                        <button class="btn btn-primary" onclick="orderViaWhatsApp('Herringbone Sport Coat', '₹22,999')">Order Now</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 8 -->
+            <div class="product-card glass">
+                <div class="product-image">
+                    <img src="https://th.bing.com/th/id/OIP.21PmjGRrM3nhDGjkU5VGMwAAAA?r=0&rs=1&pid=ImgDetMain&cb=idpwebp2&o=7&rm=3" alt="Slim Fit Dress Shirt">
+                    <div class="product-badge">NEW</div>
+                    <div class="product-wishlist"><i class="far fa-heart"></i></div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Slim Fit Dress Shirt</h3>
+                    <div class="product-price">
+                        <span class="current-price">₹999</span>
+                        <span class="original-price">₹2,000</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn btn-secondary" onclick="openProductModal(8)">Details</button>
+                        <button class="btn btn-primary" onclick="orderViaWhatsApp('Slim Fit Dress Shirt', '₹6,499')">Order Now</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 9 -->
+            <div class="product-card glass">
+                <div class="product-image">
+                    <img src="https://www.ninesparis.com/44041-thickbox_default/corduroy-jacket-navy-blue.jpg" alt="Corduroy Jacket">
+                    <div class="product-wishlist"><i class="far fa-heart"></i></div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Corduroy Jacket</h3>
+                    <div class="product-price">
+                        <span class="current-price">₹1,999</span>
+                        <span class="original-price">₹5,000</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn btn-secondary" onclick="openProductModal(9)">Details</button>
+                        <button class="btn btn-primary" onclick="orderViaWhatsApp('Corduroy Jacket', '₹15,999')">Order Now</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 10 -->
+            <div class="product-card glass">
+                <div class="product-image">
+                    <img src="https://i.pinimg.com/736x/fe/5a/88/fe5a883a894dfc8a5aa44d310577cf2c.jpg" alt="Double Breasted Suit">
+                    <div class="product-badge">CLASSIC</div>
+                    <div class="product-wishlist"><i class="far fa-heart"></i></div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Double Breasted Suit</h3>
+                    <div class="product-price">
+                        <span class="current-price">₹5,999</span>
+                        <span class="original-price">₹15,000</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn btn-secondary" onclick="openProductModal(10)">Details</button>
+                        <button class="btn btn-primary" onclick="orderViaWhatsApp('Double Breasted Suit', '₹27,999')">Order Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="section features" id="features">
+        <h2 class="section-title">Why Choose Us</h2>
+        
+        <div class="features-grid">
+            <div class="feature-card glass">
+                <div class="feature-icon">
+                    <i class="fas fa-cut"></i>
+                </div>
+                <h3 class="feature-title">Premium Tailoring</h3>
+                <p class="feature-desc">Each garment is handcrafted by master tailors with over 20 years of experience, ensuring perfect fit and finish.</p>
+            </div>
+            
+            <div class="feature-card glass">
+                <div class="feature-icon">
+                    <i class="fas fa-fabric"></i>
+                </div>
+                <h3 class="feature-title">Luxury Fabrics</h3>
+                <p class="feature-desc">We source only the finest Italian and British fabrics for unmatched quality and comfort.</p>
+            </div>
+            
+            <div class="feature-card glass">
+                <div class="feature-icon">
+                    <i class="fas fa-shipping-fast"></i>
+                </div>
+                <h3 class="feature-title">Free Shipping</h3>
+                <p class="feature-desc">Enjoy complimentary shipping across India with our premium packaging and quick delivery.</p>
+            </div>
+            
+        </div>
+    </section>
+    
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/+919792171012" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    
+    <!-- Product Modal - Optimized Height -->
+    <div id="productModal" class="modal">
+        <div class="modal-content glass">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div class="modal-top">
+                <div>
+                    <img id="modalMainImage" class="modal-main-image" src="" alt="Product Image">
+                    <div class="modal-images" id="modalThumbnails">
+                        <!-- Thumbnails will be generated here -->
+                    </div>
+                </div>
+                <div class="modal-details">
+                    <h2 id="modalTitle" class="modal-title">Classic Navy Suit</h2>
+                    <div id="modalPrice" class="modal-price">₹4,999</div>
+                    <p id="modalDescription" class="modal-description">
+                        This classic navy suit is crafted from premium Italian wool with a subtle sheen. Features include notch lapels, dual vents, and functional sleeve buttons. Perfect for weddings, business meetings, and formal events.
+                    </p>
+                    
+                    <div class="modal-specs">
+                        <div class="spec-item">
+                            <i class="fas fa-ruler spec-icon"></i>
+                            <span>Slim fit, tailored silhouette</span>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-tshirt spec-icon"></i>
+                            <span>100% Italian merino wool</span>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-palette spec-icon"></i>
+                            <span>Available in 3 classic colors</span>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-truck spec-icon"></i>
+                            <span>Delivery in 7-10 business days</span>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-actions">
+                        <button class="btn btn-primary whatsapp-btn" onclick="orderViaWhatsApp('Classic Navy Suit', '₹24,999')">
+                            <i class="fab fa-whatsapp"></i> Order via WhatsApp
+                        </button>
+                        <button class="btn btn-secondary" onclick="closeModal()">Continue Shopping</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>BOMBAY SHUT</h3>
+                <p>Premium tailoring redefined for the modern gentleman. Crafting elegance since 2010.</p>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#collection">Collection</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Customer Service</h3>
+                <ul>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Shipping Policy</a></li>
+                    <li><a href="#">FAQs</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Contact Info</h3>
+                <ul>
+                    <li><i class="fas fa-phone"></i> +91 97XXXXX012</li>
+                    <li><i class="fas fa-envelope"></i> contact@bombayshut.com</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Tinphedia Bazar, Kushinagar 274409</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2025 BOMBAY SHUT HOUSE. All Rights Reserved.| Powered By NexGenAiTech 
+        </div>
+    </footer>
+    
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navMenu.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        // Check for saved theme preference
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+            body.classList.add(currentTheme);
+            updateThemeIcon();
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            localStorage.setItem('theme', body.classList.contains('light-mode') ? 'light-mode' : '');
+            updateThemeIcon();
+        });
+        
+        function updateThemeIcon() {
+            if (body.classList.contains('light-mode')) {
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            } else {
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+        }
+        
+        // Add to Cart functionality
+        const addToCartButtons = document.querySelectorAll('.btn-primary:not(.whatsapp-btn)');
+        const cartCount = document.querySelector('.cart-count');
+        let count = 0;
+        
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                count++;
+                cartCount.textContent = count;
+                
+                // Animation effect
+                const originalText = button.textContent;
+                button.textContent = 'Added!';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                }, 1500);
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (navMenu.classList.contains('active')) {
+                        navMenu.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                }
+            });
+        });
+        
+        // Product data with unique images for each product
+        const productsData = [
+            {
+                id: 1,
+                title: "Classic Navy Suit",
+                price: "₹4,999",
+                description: "This classic navy suit is crafted from premium Italian wool with a subtle sheen. Features include notch lapels, dual vents, and functional sleeve buttons. Perfect for weddings, business meetings, and formal events.",
+                images: [
+                    "https://images.hawesandcurtis.com/tr:q-80/JK/JKPRHC42-G01-186822-1400px-1820px.jpg",
+                    "https://th.bing.com/th/id/OIP.xqyH_PV2fgSnGbajesFc4QHaJo?r=0&pid=ImgDet&w=474&h=616&rs=1&cb=idpwebp2&o=7&rm=3",
+                    "https://th.bing.com/th/id/OIP.ZUZLfsYnQrkMNp09PhcgWQHaJo?r=0&pid=ImgDet&w=474&h=616&rs=1&cb=idpwebp2&o=7&rm=3",
+                    "https://handcmediastorage.blob.core.windows.net/productimages/JK/JKPRAC03-G01-179268-500px-650px.jpg"
+                ]
+            },
+            {
+                id: 2,
+                title: "Charcoal Tuxedo",
+                price: "₹4,999",
+                description: "Our premium charcoal tuxedo features a satin peak lapel, satin-covered buttons, and satin stripe on the trousers. Made from luxurious 280 GSM wool, it offers both comfort and style for your most formal occasions.",
+                images: [
+                    "https://www.tuxedosonline.com/wp-content/uploads/2021/07/twilight_tuxedo1.jpg",
+                    "data:image/webp;base64,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",
+                    "https://th.bing.com/th/id/OIP.nlS6QTQDI5CcbN7rP2qRrAHaJl?r=0&pid=ImgDet&w=173&h=224&c=7&dpr=1.5&cb=idpwebp2&o=7&rm=3",
+                    "https://th.bing.com/th/id/OIP.XwsDO22lhb-nzQLgVrJ6ywHaLH?r=0&pid=ImgDet&w=173&h=259&c=7&dpr=1.5&cb=idpwebp2&o=7&rm=3"
+                ]
+            },
+            {
+                id: 3,
+                title: "Linen Beige Blazer",
+                price: "₹4,499",
+                description: "Perfect for summer events, this beige linen blazer is lightweight and breathable. Features patch pockets, natural shoulders, and a relaxed fit. Pair with chinos or linen trousers for a sophisticated warm-weather look.",
+                images: [
+                    "https://th.bing.com/th/id/OIP.vyDrC7A1bTT9QDkKeB-PBwDDEs?r=0&pid=ImgDet&w=194&h=297&c=7&dpr=1.5&cb=idpwebp2&o=7&rm=3",
+                    "https://th.bing.com/th/id/OIP.PqL7OopJCI4W4rhXe_JgzgAAAA?r=0&pid=ImgDet&w=194&h=248&c=7&dpr=1.5&cb=idpwebp2&o=7&rm=3",
+                    "https://www.careofcarl.com/bilder/artiklar/zoom/27552111r_3.jpg?m=1723636183",
+                    "https://sfycdn.speedsize.com/2780c694-3419-4266-9652-d242439affeb/https://stateandliberty.com/cdn/shop/products/CreamLinenBlazer1.jpg?v=1680716488&width=2048"
+                ]
+            },
+            {
+                id: 4,
+                title: "Wool Gray Pants",
+                price: "₹1,999",
+                description: "Crafted from premium wool blend, these gray dress pants feature a modern slim fit, flat front design, and functional belt loops. Perfect for both office wear and formal occasions. Dry clean only.",
+                images: [
+                    "https://th.bing.com/th/id/OIP.hWyuvVBMiSs1jOnSuGa5CQHaKE?r=0&pid=ImgDet&w=173&h=235&c=7&dpr=1.5&cb=idpwebp2&o=7&rm=3",
+                    "https://th.bing.com/th/id/OIP.zF1Y1DtIFldj3MyNQ-jinwHaKE?r=0&pid=ImgDet&w=173&h=235&c=7&dpr=1.5&cb=idpwebp2&o=7&rm=3",
+                    "https://th.bing.com/th/id/OIP.EqAC1O6FVGB10iqtMLnkLQHaKE?r=0&pid=ImgDet&w=173&h=235&c=7&dpr=1.5&cb=idpwebp2&o=7&rm=3",
+                    "https://th.bing.com/th/id/OIP.TWwdcTEwnH_5ESys_SKnrwHaKE?r=0&pid=ImgDet&w=173&h=235&c=7&dpr=1.5&cb=idpwebp2&o=7&rm=3"
+                ]
+            },
+            {
+                id: 5,
+                title: "Midnight Blue Tuxedo",
+                price: "₹3,999",
+                description: "Make a statement with our midnight blue tuxedo. Features a satin shawl collar, satin covered buttons, and a luxurious feel. Perfect for weddings, galas, and black-tie events.",
+                images: [
+                    "https://th.bing.com/th/id/OIP.0ud2yM2z4Rzt6SE5OHVhaQHaIv?r=0&pid=ImgDet&w=474&h=559&rs=1&cb=idpwebp2&o=7&rm=3",
+                    "https://th.bing.com/th/id/OIP.J3n-hG1M81S_0wloo9kaLwHaIv?r=0&pid=ImgDet&w=474&h=559&rs=1&cb=idpwebp2&o=7&rm=3",
+                    "https://th.bing.com/th/id/OIP.dPhtLoYclJt6hfsthof9jAHaKx?r=0&pid=ImgDet&w=474&h=689&rs=1&cb=idpwebp2&o=7&rm=3",
+                    "https://th.bing.com/th/id/OIP.cuM2ctHTQg6C9ejzWjDmqwHaIv?r=0&rs=1&pid=ImgDetMain&cb=idpwebp2&o=7&rm=3"
+                ]
+            },
+            {
+                id: 6,
+                title: "Cashmere Overcoat",
+                price: "₹2,999",
+                description: "Stay warm in style with our premium cashmere overcoat. Features a classic design with notch lapels, double-breasted closure, and deep pockets. Perfect for winter elegance.",
+                images: [
+                    "https://th.bing.com/th/id/OIP.d4lyhrZ_5qQ_qxG6UIcqVwHaJo?r=0&pid=ImgDet&w=474&h=616&rs=1&cb=idpwebp2&o=7&rm=3",
+                    "https://i.pinimg.com/736x/4f/d3/e9/4fd3e9fce73860726c21781cca07a544.jpg",
+                    "https://th.bing.com/th/id/OIP.ZWqFkyJpsl1K7PiDDDrjcgAAAA?r=0&rs=1&pid=ImgDetMain&cb=idpwebp2&o=7&rm=3",
+                    "https://cdn.shopify.com/s/files/1/0274/5860/0995/products/luxury-overcoat-wool-and-cashmere-navy-377127.png?v=1701818685"
+                ]
+            },
+            {
+                id: 7,
+                title: "Herringbone Sport Coat",
+                price: "₹5,999",
+                description: "This herringbone sport coat features a timeless pattern with a modern fit. Perfect for both business casual and evening events. Made from premium wool blend for year-round comfort.",
+                images: [
+                    "https://image.menswearhouse.com/is/image/TMW/TMW_11WB_54_TOMMY_HILFIGER_SPORT_COATS_GREY_HERRINGBONE_MAIN?imPolicy=pdp2",
+                    "https://image.menswearhouse.com/is/image/TMW/TMW_11WB_54_TOMMY_HILFIGER_SPORT_COATS_GREY_HERRINGBONE_MAIN?imPolicy=pdp2",
+                    "https://image.menswearhouse.com/is/image/TMW/TMW_10ZB_82_PRONTO_UOMO_SPORT_COATS_BLUE_BONE_MAIN?imPolicy=pdp2",
+                    "https://image.josbank.com/is/image/JosBank/12ZB_70_TRAVELER_BLUE_MAIN?$pgp_desktop_thumbnail_lg$"
+                ]
+            },
+            {
+                id: 8,
+                title: "Slim Fit Dress Shirt",
+                price: "₹999",
+                description: "Our premium cotton dress shirt features a modern slim fit, French cuffs, and a spread collar. Perfect for pairing with suits or wearing alone with dress pants.",
+                images: [
+                    "https://m.media-amazon.com/images/I/610NaWLzXvL._AC_SL1500_.jpg",
+                    "https://i5.walmartimages.com/seo/Alimens-Gentle-Men-s-Long-Sleeve-Button-Down-Shirts-Stretch-Dress-Shirts-Muscle-Fit_76f7aa79-b4bc-439a-ad51-64ba1ed36766.a15a157e46ad01012823bea981e4443b.jpeg",
+                    "https://i5.walmartimages.com/seo/Alimens-Gentle-Mens-Stretch-Dress-Shirts-Solid-Casual-Button-Down-Shirts-Slim-Fit_9c15a057-b660-4e9b-8746-a06818cd58bc.6d3d5486b07d9d31c83b1aca3503b921.jpeg",
+                    "https://i.pinimg.com/originals/f5/73/91/f57391679de00e5e2cac40386ae3ba46.jpg"
+                ]
+            },
+            {
+                id: 9,
+                title: "Corduroy Jacket",
+                price: "₹1,999",
+                description: "This corduroy jacket features a modern fit with a soft texture and rich color. Perfect for casual occasions and autumn weather. Made from premium cotton corduroy for comfort and durability.",
+                images: [
+                    "https://th.bing.com/th/id/OIP.lP-wn_mWpGpSePf6RqM0wwHaJ4?r=0&pid=ImgDet&w=474&h=632&rs=1&cb=idpwebp2&o=7&rm=3",
+                    "https://th.bing.com/th/id/OPAC.znoqwNFETZWZkA474C474?o=5&pid=21.1&w=173&h=227&c=7&dpr=1.5&cb=idpwebp2&o=7&rm=3",
+                    "https://assets.myntassets.com/h_200,w_200,c_fill,g_auto/h_1440,q_100,w_1080/v1/assets/images/21023438/2022/12/3/6888d051-913a-4cbc-baf3-e39099b39e421670050052169XposeWomenBrownStripedCorduroyCropDenimJacket1.jpg",
+                    "https://th.bing.com/th/id/OIP.n9RcpuIUnSJ9ELqxyvOJ-AHaLH?r=0&pid=ImgDet&w=173&h=259&c=7&dpr=1.5&cb=idpwebp2&o=7&rm=3"
+                ]
+            },
+            {
+                id: 10,
+                title: "Double Breasted Suit",
+                price: "₹5,999",
+                description: "Make a powerful impression with our double-breasted suit. Features peak lapels, six-button closure, and a modern silhouette. Made from premium wool for a luxurious feel.",
+                images: [
+                    "https://i.etsystatic.com/36332849/r/il/d2ff07/5665398591/il_1080xN.5665398591_5lc4.jpg",
+                    "https://th.bing.com/th/id/OIP.YJoiFQCn40Jyie0yjqBWZQHaIP?r=0&pid=ImgDet&w=474&h=527&rs=1&cb=idpwebp2&o=7&rm=3",
+                    "https://www.bucco.us/wp-content/uploads/2022/03/Wedding-Suit.jpg",
+                    "https://i.etsystatic.com/37668241/r/il/47cce5/5475728817/il_fullxfull.5475728817_n50z.jpg"
+                ]
+            }
+        ];
+        
+        // Modal Functions
+        function openProductModal(productId) {
+            const modal = document.getElementById('productModal');
+            const modalMainImage = document.getElementById('modalMainImage');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalPrice = document.getElementById('modalPrice');
+            const modalDescription = document.getElementById('modalDescription');
+            const modalThumbnails = document.getElementById('modalThumbnails');
+            
+            // Find product by ID
+            const product = productsData.find(p => p.id === productId);
+            
+            if (!product) return;
+            
+            // Set product details
+            modalTitle.textContent = product.title;
+            modalPrice.textContent = product.price;
+            modalDescription.textContent = product.description;
+            
+            // Clear existing thumbnails
+            modalThumbnails.innerHTML = '';
+            
+            // Create thumbnails
+            product.images.forEach((imgUrl, index) => {
+                const thumb = document.createElement('img');
+                thumb.src = imgUrl;
+                thumb.alt = `Thumbnail ${index + 1}`;
+                thumb.onclick = function() {
+                    changeMainImage(this);
+                };
+                
+                // Set first thumbnail as active
+                if (index === 0) {
+                    thumb.classList.add('active');
+                    modalMainImage.src = imgUrl;
+                }
+                
+                modalThumbnails.appendChild(thumb);
+            });
+            
+            modal.style.display = "flex";
+            document.body.style.overflow = "hidden";
+        }
+        
+        function closeModal() {
+            const modal = document.getElementById('productModal');
+            modal.style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+        
+        function changeMainImage(img) {
+            const modalMainImage = document.getElementById('modalMainImage');
+            modalMainImage.src = img.src;
+            
+            // Update active class
+            document.querySelectorAll('.modal-images img').forEach(thumb => {
+                thumb.classList.remove('active');
+            });
+            img.classList.add('active');
+        }
+        
+        // Close modal when clicking outside content
+        window.addEventListener('click', (e) => {
+            const modal = document.getElementById('productModal');
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+        
+        // WhatsApp Order Function
+        function orderViaWhatsApp(productName, price) {
+            const message = `I want to order: ${productName} at ${price}. Please confirm availability and provide payment details.`;
+            const whatsappUrl = `https://wa.me/+919792171012?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+    </script>
+</body>
+</html>
