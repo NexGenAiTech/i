@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DocSwift - Premium Document Services</title>
+    <title>डॉकस्विफ्ट - प्रीमियम दस्तावेज़ सेवाएँ</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
     <style>
@@ -21,6 +21,14 @@
             --glass-border: rgba(255, 255, 255, 0.2);
             --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
+            --referral: #f59e0b;
+            --referral-dark: #d97706;
+            --google-blue: #4285F4;
+            --google-green: #34A853;
+            --google-yellow: #FBBC05;
+            --google-red: #EA4335;
+            --nexgen-purple: #7e22ce;
+            --hindi-orange: #ff9933;
         }
 
         * {
@@ -42,6 +50,42 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+            position: relative;
+        }
+
+        /* English Language Button */
+        .english-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background: white;
+            border-radius: 50px;
+            font-weight: 500;
+            color: var(--dark);
+            text-decoration: none;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid var(--light-gray);
+        }
+        
+        .english-btn:hover {
+            background: #f8fafc;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+        
+        .english-icon {
+            color: var(--hindi-orange);
+            font-size: 20px;
+        }
+        
+        .english-text {
+            font-weight: 600;
         }
 
         .logo {
@@ -50,26 +94,27 @@
             gap: 10px;
             text-decoration: none;
             padding: 15px 0;
-            justify-content: center;
+            
         }
 
         .logo-icon {
-            width: 40px;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            width: 150px;
             height: 40px;
-            background: var(--primary);
+            background: whitesmoke;
             border-radius: 10px;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 20px;
+            align-items:center;
+            justify-content:center;
+            color: rgb(48, 9, 221);
+            font-size: 30px;
             font-weight: bold;
         }
 
         .logo-text {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 24px;
-            font-weight: 800;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 10px;
+            font-weight: 100;
             background: linear-gradient(to right, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             background-clip: text;
@@ -79,8 +124,8 @@
         .btn {
             display: inline-block;
             padding: 12px 28px;
-            border-radius: 50px;
-            font-weight: 600;
+            border-radius: 70px;
+            font-weight: 800px;
             text-decoration: none;
             transition: var(--transition);
             cursor: pointer;
@@ -91,7 +136,7 @@
         .btn-primary {
             background: linear-gradient(to right, var(--primary), var(--secondary));
             color: white;
-            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+            box-shadow: 0 4px 15px rgba(37, 235, 186, 0.3);
         }
 
         .btn-primary:hover {
@@ -123,6 +168,55 @@
             background: #128c7e;
             transform: translateY(-3px);
         }
+        
+        .btn-referral {
+            background: linear-gradient(to right, var(--referral), var(--referral-dark));
+            color: white;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+        
+        .btn-referral:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+        }
+        
+        .btn-google {
+            background: white;
+            color: var(--dark);
+            border: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .btn-google:hover {
+            background: #f8f9fa;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .google-logo {
+            display: inline-flex;
+            font-weight: 700;
+            position: relative;
+            width: 20px;
+            height: 20px;
+        }
+        
+        .google-logo span {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+        
+        .google-blue { background-color: var(--google-blue); top: 0; left: 0; }
+        .google-red { background-color: var(--google-red); top: 0; right: 0; }
+        .google-yellow { background-color: var(--google-yellow); bottom: 0; left: 0; }
+        .google-green { background-color: var(--google-green); bottom: 0; right: 0; }
 
         /* Hero Section */
         .hero {
@@ -544,6 +638,38 @@
             70% { box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); }
             100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
+        
+        /* Referral Floating Button */
+        .referral-btn {
+            position: fixed;
+            bottom: 85px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(to bottom, var(--referral), var(--referral-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 22px;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+            z-index: 999;
+            transition: var(--transition);
+            animation: pulse-referral 2s infinite;
+            cursor: pointer;
+        }
+        
+        .referral-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.6);
+        }
+        
+        @keyframes pulse-referral {
+            0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.6); }
+            70% { box-shadow: 0 0 0 12px rgba(245, 158, 11, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+        }
 
         /* Document Modal */
         .modal {
@@ -577,6 +703,7 @@
             font-size: 22px;
             cursor: pointer;
             color: var(--gray);
+            z-index: 100;
         }
 
         .modal-title {
@@ -602,34 +729,456 @@
         .documents-list li i {
             color: var(--success);
         }
+        
+        /* Referral Modal */
+        .referral-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .referral-modal-content {
+            background: white;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+            text-align: center;
+        }
+        
+        .referral-modal h2 {
+            font-size: 1.8rem;
+            color: var(--referral);
+            margin-bottom: 15px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .referral-modal p {
+            color: var(--gray);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .referral-badge {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 2px dashed var(--referral-dark);
+            border-radius: 15px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .referral-amount {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--referral);
+            margin: 10px 0;
+        }
+        
+        .referral-link-container {
+            display: flex;
+            margin: 20px 0;
+            border: 1px solid var(--light-gray);
+            border-radius: 50px;
+            overflow: hidden;
+        }
+        
+        .referral-link {
+            flex: 1;
+            padding: 12px 20px;
+            background: #f9fafb;
+            color: var(--dark);
+            text-align: left;
+            font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .copy-btn {
+            background: var(--referral);
+            color: white;
+            border: none;
+            padding: 0 20px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .copy-btn:hover {
+            background: var(--referral-dark);
+        }
+        
+        .referral-share {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 25px 0;
+        }
+        
+        .share-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            transition: var(--transition);
+        }
+        
+        .share-btn.whatsapp {
+            background: #25d366;
+        }
+        
+        .share-btn.facebook {
+            background: #3b5998;
+        }
+        
+        .share-btn.twitter {
+            background: #1da1f2;
+        }
+        
+        .share-btn.link {
+            background: var(--primary);
+        }
+        
+        .share-btn:hover {
+            transform: translateY(-3px);
+        }
+        
+        .referral-terms {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            text-align: left;
+        }
+        
+        .referral-terms h4 {
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+        
+        .referral-terms ul {
+            padding-left: 20px;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .referral-terms li {
+            margin-bottom: 8px;
+        }
+        
+        /* Apply Options Modal */
+        .apply-options-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .apply-options-content {
+            background: white;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+            text-align: center;
+        }
+        
+        .apply-options-content h2 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .apply-options-content p {
+            color: var(--gray);
+            margin-bottom: 25px;
+        }
+        
+        .apply-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 25px 0;
+        }
+        
+        .apply-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            width: 100%;
+            text-decoration: none;
+        }
+        
+        .apply-btn.google {
+            background: white;
+            color: var(--dark);
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .apply-btn.google:hover {
+            background: #f8f9fa;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .apply-btn.whatsapp {
+            background: #25d366;
+            color: white;
+        }
+        
+        .apply-btn.whatsapp:hover {
+            background: #128c7e;
+            transform: translateY(-2px);
+        }
+        
+        /* New styles for name input */
+        .referral-name-input {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .referral-name-input input {
+            padding: 12px 20px;
+            border: 1px solid var(--light-gray);
+            border-radius: 50px;
+            font-size: 16px;
+            width: 100%;
+        }
+        
+        .referral-name-input button {
+            background: var(--referral);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            width: 100%;
+        }
+        
+        .referral-name-input button:hover {
+            background: var(--referral-dark);
+        }
+        
+        #referralResultSection {
+            display: none;
+        }
+        
+        .name-error {
+            color: #e53e3e;
+            margin-top: 5px;
+            font-size: 14px;
+            text-align: left;
+            padding-left: 20px;
+            display: none;
+        }
+        
+        /* Fixed close button */
+        .close-modal.fixed {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 10000;
+        }
+        
+        /* NexGenAiTech Button */
+        .nexgen-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 25px;
+            background: linear-gradient(to right, var(--nexgen-purple), #6d28d9);
+            color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(126, 34, 206, 0.3);
+            margin-top: 15px;
+        }
+        
+        .nexgen-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(126, 34, 206, 0.4);
+        }
     </style>
 </head>
 <body>
     <!-- WhatsApp Button -->
-    <a href="https://wa.me/918055698328" class="whatsapp-btn">
+    <a href="https://wa.me/+919322346340" class="whatsapp-btn">
         <i class="fab fa-whatsapp"></i>
     </a>
+    
+    <!-- Referral Floating Button -->
+    <div class="referral-btn" id="referralFloatingBtn">
+        <i class="fas fa-gift"></i>
+    </div>
+    
+    <!-- Fixed Close Button -->
+    <div class="close-modal fixed" id="fixedCloseBtn" style="display: none;">×</div>
 
     <!-- Document Modal -->
     <div class="modal" id="documentModal">
         <div class="modal-content">
             <span class="close-modal" id="closeModal">&times;</span>
-            <h2 class="modal-title" id="modalServiceTitle">Service Name</h2>
-            <h3>Required Documents:</h3>
+            <h2 class="modal-title" id="modalServiceTitle">सेवा का नाम</h2>
+            <h3>आवश्यक दस्तावेज़:</h3>
             <ul class="documents-list" id="documentsList">
                 <!-- Documents will be added here dynamically -->
             </ul>
             <a href="#" class="btn btn-whatsapp" id="whatsappApplyBtn" style="margin-top: 15px;">
-                <i class="fab fa-whatsapp"></i> Ask for Required Documents
+                <i class="fab fa-whatsapp"></i> आवश्यक दस्तावेज़ों के बारे में पूछें
             </a>
         </div>
     </div>
+    
+    <!-- Referral Modal -->
+    <div class="referral-modal" id="referralModal">
+        <div class="referral-modal-content">
+            <span class="close-modal" id="closeReferralModal">&times;</span>
+            <h2>सुझाएं और कमाएं</h2>
+            <p>अपने दोस्तों को अपना रेफ़रल लिंक साझा करें और उनके द्वारा पूरी की गई हर सेवा के लिए <span class="highlight">₹50 तक कमाएँ!</span></p>
+            
+            <!-- Name input section -->
+            <div id="nameInputSection">
+                <p>एक निजीकृत रेफ़रल लिंक बनाने के लिए अपना नाम दर्ज करें:</p>
+                <div class="referral-name-input">
+                    <input type="text" id="referralName" placeholder="आपका पूरा नाम">
+                    <div class="name-error" id="nameError">कृपया रेफ़रल कोड जेनरेट करने के लिए अपना नाम दर्ज करें</div>
+                    <button id="generateReferralBtn">रेफ़रल लिंक बनाएं</button>
+                </div>
+            </div>
+            
+            <!-- Referral result section -->
+            <div id="referralResultSection">
+                <div class="referral-badge">
+                    <div>प्रति सफल रेफ़रल</div>
+                    <div class="referral-amount">₹50 तक</div>
+                    <div>कमाएँ</div>
+                </div>
+                
+                <div class="referral-link-container">
+                    <div class="referral-link" id="referralLink">https://shorturl.at/nmvgI?ref=</div>
+                    <button class="copy-btn" id="copyReferralBtn">कॉपी करें</button>
+                </div>
+                
+                <div class="referral-share">
+                    <a href="#" class="share-btn whatsapp" id="whatsappShareBtn">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="#" class="share-btn facebook" id="facebookShareBtn">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="share-btn twitter" id="twitterShareBtn">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="share-btn link" id="linkShareBtn">
+                        <i class="fas fa-link"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="referral-terms">
+                <h4>यह कैसे काम करता है:</h4>
+                <ul>
+                    <li>अपने दोस्तों के साथ अपना अद्वितीय रेफ़रल लिंक साझा करें</li>
+                    <li>जब आपका दोस्त अपनी पहली दस्तावेज़ सेवा के लिए भुगतान करता है</li>
+                    <li>वे जो सेवा पूरी करते हैं उसके लिए ₹50 तक कमाएँ</li>
+                    <li>आपका इनाम 24 घंटे के भीतर यूपीआई के माध्यम से सीधे आपके बैंक खाते में स्थानांतरित कर दिया जाएगा</li>
+                </ul>
+            </div>
 
-    <!-- Logo -->
+            <button class="btn btn-referral" id="referralCloseBtn" style="width: 100%; margin-top: 15px;">
+                अभी कमाना शुरू करें
+            </button>
+        </div>
+    </div>
+    
+    <!-- Apply Options Modal -->
+    <div class="apply-options-modal" id="applyOptionsModal">
+        <div class="apply-options-content">
+            <span class="close-modal" id="closeApplyOptionsModal">&times;</span>
+            <h2 id="applyServiceTitle">सेवा के लिए आवेदन करें</h2>
+            <p>अपनी पसंदीदा आवेदन विधि चुनें:</p>
+            
+            <div class="apply-buttons">
+                <a href="#" class="apply-btn google" id="googleFormBtn">
+                    <i class="fab fa-google"></i>
+                    Google फॉर्म के माध्यम से आवेदन करें
+                </a>
+                <a href="#" class="apply-btn whatsapp" id="whatsappApplyBtn2">
+                    <i class="fab fa-whatsapp"></i>
+                    WhatsApp के माध्यम से आवेदन करें
+                </a>
+            </div>
+            
+            <div class="referral-terms">
+                <h4>DocSwift क्यों चुनें?</h4>
+                <ul>
+                    <li>100% सुरक्षित दस्तावेज़ हैंडलिंग</li>
+                    <li>पूरी प्रक्रिया में विशेषज्ञ सहायता</li>
+                    <li>स्थिति अपडेट के साथ तेज़ प्रसंस्करण</li>
+                    <li>किसी भी प्रश्न के लिए समर्पित सहायता</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Logo and English Button -->
     <div class="container">
+        <!-- English Language Button -->
+        <a href="ds3-1.html" class="english-btn" id="englishButton">
+            <i class="fas fa-language english-icon"></i>
+            <span class="english-text">English</span>
+        </a>
+        
         <div class="logo">
-            <div class="logo-icon">DS</div>
-            <div class="logo-text">DocSwift</div>
+            <div class="logo-icon">DocSwift</div>
+            <div class="logo-text"></div>
         </div>
     </div>
 
@@ -639,31 +1188,31 @@
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
-                    <h1>Get Your <span class="highlight">Government Documents</span> Without The Hassle</h1>
-                    <p>Apply for certificates, licenses, and more with our fast, secure, and user-friendly service, All from Home.</p>
+                    <h1>बिना किसी परेशानी के प्राप्त करें अपने <span class="highlight">सरकारी दस्तावेज़</span></h1>
+                    <p>हमारी तेज़, सुरक्षित और उपयोगकर्ता के अनुकूल सेवा के साथ प्रमाणपत्र, लाइसेंस और अधिक के लिए आवेदन करें, सभी घर बैठे।</p>
                     <div class="cta-buttons" style="display: flex; gap: 15px; justify-content: center;">
-                        <a href="#services" class="btn btn-primary">Get Started</a>
-                        <a href="#process" class="btn btn-outline">How It Works</a>
+                        <a href="#services" class="btn btn-primary">शुरू करें</a>
+                        <a href="#process" class="btn btn-outline">यह कैसे काम करता है</a>
                     </div>
                     
                     <div class="hero-stats">
                         <div class="stat-item">
-                            <div class="stat-number">15,00+</div>
-                            <div class="stat-label">Documents</div>
+                            <div class="stat-number">500+</div>
+                            <div class="stat-label">दस्तावेज़</div>
                         </div>
                         <div class="stat-item">
                             <div class="stat-number">99%</div>
-                            <div class="stat-label">Success Rate</div>
+                            <div class="stat-label">सफलता दर</div>
                         </div>
                         <div class="stat-item">
                             <div class="stat-number">24/7</div>
-                            <div class="stat-label">Support</div>
+                            <div class="stat-label">समर्थन</div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="hero-image">
-                <img src="https://socialmarketingfella.com/wp-content/uploads/2016/10/revolution.jpg" alt="Document Services" style="border-radius: 20px; box-shadow: 0 15px 30px rgba(0,0,0,0.1); max-width: 100%;">
+                <img src="https://socialmarketingfella.com/wp-content/uploads/2016/10/revolution.jpg" alt="दस्तावेज़ सेवाएँ" style="border-radius: 20px; box-shadow: 0 15px 30px rgba(0,0,0,0.1); max-width: 100%;">
                 </div>
             </div>
         </div>
@@ -673,8 +1222,8 @@
     <section class="section" id="services">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Our Premium Services</h2>
-                <p class="section-subtitle">One-stop solution for all your document needs</p>
+                <h2 class="section-title">हमारी प्रीमियम सेवाएँ</h2>
+                <p class="section-subtitle">आपकी सभी दस्तावेज़ आवश्यकताओं के लिए वन-स्टॉप समाधान</p>
             </div>
             
             <div class="services-grid">
@@ -684,15 +1233,15 @@
                         <i class="fas fa-id-card"></i>
                     </div>
                     <div class="service-content">
-                        <h3>Caste Certificate</h3>
-                        <p>Official certificate for caste verification required for government schemes</p>
+                        <h3>जाति प्रमाण पत्र</h3>
+                        <p>सरकारी योजनाओं के लिए आवश्यक जाति सत्यापन का आधिकारिक प्रमाणपत्र</p>
                         <div class="service-price">
-                            <span class="service-old-price">₹799</span>
-                            <span>₹499</span>
+                            <span class="service-old-price">₹100</span>
+                            <span>₹49</span>
                         </div>
                         <div class="service-buttons">
-                            <button class="btn btn-primary apply-now" data-service="Caste Certificate">Apply Now</button>
-                            <button class="btn btn-outline req-docs" data-service="Caste Certificate">Documents</button>
+                            <button class="btn btn-primary apply-now" data-service="जाति प्रमाण पत्र">अभी आवेदन करें</button>
+                            <button class="btn btn-outline req-docs" data-service="जाति प्रमाण पत्र">दस्तावेज़</button>
                         </div>
                     </div>
                 </div>
@@ -703,15 +1252,15 @@
                         <i class="fas fa-file-invoice-dollar"></i>
                     </div>
                     <div class="service-content">
-                        <h3>Income Certificate</h3>
-                        <p>Proof of annual income for educational and financial benefits</p>
+                        <h3>आय प्रमाण पत्र</h3>
+                        <p>शैक्षिक और वित्तीय लाभों के लिए वार्षिक आय का प्रमाण</p>
                         <div class="service-price">
-                            <span class="service-old-price">₹899</span>
-                            <span>₹549</span>
+                            <span class="service-old-price">₹100</span>
+                            <span>₹49</span>
                         </div>
                         <div class="service-buttons">
-                            <button class="btn btn-primary apply-now" data-service="Income Certificate">Apply Now</button>
-                            <button class="btn btn-outline req-docs" data-service="Income Certificate">Documents</button>
+                            <button class="btn btn-primary apply-now" data-service="आय प्रमाण पत्र">अभी आवेदन करें</button>
+                            <button class="btn btn-outline req-docs" data-service="आय प्रमाण पत्र">दस्तावेज़</button>
                         </div>
                     </div>
                 </div>
@@ -722,15 +1271,15 @@
                         <i class="fas fa-house-user"></i>
                     </div>
                     <div class="service-content">
-                        <h3>Domicile Certificate</h3>
-                        <p>Proof of residence in a particular state or union territory</p>
+                        <h3>मूल निवासी प्रमाण पत्र</h3>
+                        <p>किसी विशेष राज्य या केंद्र शासित प्रदेश में निवास का प्रमाण</p>
                         <div class="service-price">
-                            <span class="service-old-price">₹849</span>
-                            <span>₹499</span>
+                            <span class="service-old-price">₹100</span>
+                            <span>₹49</span>
                         </div>
                         <div class="service-buttons">
-                            <button class="btn btn-primary apply-now" data-service="Domicile Certificate">Apply Now</button>
-                            <button class="btn btn-outline req-docs" data-service="Domicile Certificate">Documents</button>
+                            <button class="btn btn-primary apply-now" data-service="मूल निवासी प्रमाण पत्र">अभी आवेदन करें</button>
+                            <button class="btn btn-outline req-docs" data-service="मूल निवासी प्रमाण पत्र">दस्तावेज़</button>
                         </div>
                     </div>
                 </div>
@@ -741,15 +1290,15 @@
                         <i class="fas fa-baby"></i>
                     </div>
                     <div class="service-content">
-                        <h3>Birth Certificate</h3>
-                        <p>Official record of birth required for admission, passport, etc.</p>
+                        <h3>जन्म प्रमाण पत्र</h3>
+                        <p>प्रवेश, पासपोर्ट आदि के लिए आवश्यक जन्म का आधिकारिक रिकॉर्ड</p>
                         <div class="service-price">
-                            <span class="service-old-price">₹699</span>
-                            <span>₹399</span>
+                            <span class="service-old-price">₹1000</span>
+                            <span>₹599</span>
                         </div>
                         <div class="service-buttons">
-                            <button class="btn btn-primary apply-now" data-service="Birth Certificate">Apply Now</button>
-                            <button class="btn btn-outline req-docs" data-service="Birth Certificate">Documents</button>
+                            <button class="btn btn-primary apply-now" data-service="जन्म प्रमाण पत्र">अभी आवेदन करें</button>
+                            <button class="btn btn-outline req-docs" data-service="जन्म प्रमाण पत्र">दस्तावेज़</button>
                         </div>
                     </div>
                 </div>
@@ -760,15 +1309,15 @@
                         <i class="fas fa-book-dead"></i>
                     </div>
                     <div class="service-content">
-                        <h3>Death Certificate</h3>
-                        <p>Official record of death for legal and financial settlements</p>
+                        <h3>मृत्यु प्रमाण पत्र</h3>
+                        <p>कानूनी और वित्तीय निपटान के लिए मृत्यु का आधिकारिक रिकॉर्ड</p>
                         <div class="service-price">
-                            <span class="service-old-price">₹699</span>
-                            <span>₹399</span>
+                            <span class="service-old-price">₹1000</span>
+                            <span>₹499</span>
                         </div>
                         <div class="service-buttons">
-                            <button class="btn btn-primary apply-now" data-service="Death Certificate">Apply Now</button>
-                            <button class="btn btn-outline req-docs" data-service="Death Certificate">Documents</button>
+                            <button class="btn btn-primary apply-now" data-service="मृत्यु प्रमाण पत्र">अभी आवेदन करें</button>
+                            <button class="btn btn-outline req-docs" data-service="मृत्यु प्रमाण पत्र">दस्तावेज़</button>
                         </div>
                     </div>
                 </div>
@@ -779,53 +1328,53 @@
                         <i class="fas fa-car"></i>
                     </div>
                     <div class="service-content">
-                        <h3>Driving License</h3>
-                        <p>Official authorization to drive motor vehicles on public roads</p>
+                        <h3>ड्राइविंग लाइसेंस</h3>
+                        <p>सार्वजनिक सड़कों पर मोटर वाहन चलाने के लिए आधिकारिक प्राधिकरण</p>
                         <div class="service-price">
-                            <span class="service-old-price">₹1499</span>
-                            <span>₹999</span>
+                            <span class="service-old-price">₹5000</span>
+                            <span>₹3199</span>
                         </div>
                         <div class="service-buttons">
-                            <button class="btn btn-primary apply-now" data-service="Driving License">Apply Now</button>
-                            <button class="btn btn-outline req-docs" data-service="Driving License">Documents</button>
+                            <button class="btn btn-primary apply-now" data-service="ड्राइविंग लाइसेंस">अभी आवेदन करें</button>
+                            <button class="btn btn-outline req-docs" data-service="ड्राइविंग लाइसेंस">दस्तावेज़</button>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Service Card 7 - Shop License -->
+                <!-- Service Card 7 - Scholarship Registration -->
                 <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-store"></i>
                     </div>
                     <div class="service-content">
-                        <h3>Shop License</h3>
-                        <p>License required to legally operate a commercial establishment</p>
+                        <h3>छात्रवृत्ति पंजीकरण</h3>
+                        <p>कानूनी रूप से एक वाणिज्यिक प्रतिष्ठान संचालित करने के लिए आवश्यक लाइसेंस</p>
                         <div class="service-price">
-                            <span class="service-old-price">₹2499</span>
-                            <span>₹1799</span>
+                            <span class="service-old-price">₹200</span>
+                            <span>₹99</span>
                         </div>
                         <div class="service-buttons">
-                            <button class="btn btn-primary apply-now" data-service="Shop License">Apply Now</button>
-                            <button class="btn btn-outline req-docs" data-service="Shop License">Documents</button>
+                            <button class="btn btn-primary apply-now" data-service="छात्रवृत्ति पंजीकरण">अभी आवेदन करें</button>
+                            <button class="btn btn-outline req-docs" data-service="छात्रवृत्ति पंजीकरण">दस्तावेज़</button>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Service Card 8 - Food License -->
+                <!-- Service Card 8 - Exam Registration -->
                 <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-file-alt"></i>
                     </div>
                     <div class="service-content">
-                        <h3>Exam Registration</h3>
-                        <p>Apply JEE, NEET, CUET, SSC exams—one smart trusted platform.</p>
+                        <h3>परीक्षा पंजीकरण</h3>
+                        <p>JEE, NEET, CUET, SSC परीक्षाओं के लिए आवेदन करें - एक स्मार्ट विश्वसनीय प्लेटफ़ॉर्म</p>
                         <div class="service-price">
-                            <span class="service-old-price">₹2299</span>
-                            <span>₹2299</span>
+                            <span class="service-old-price">₹200</span>
+                            <span>₹99</span>
                         </div>
                         <div class="service-buttons">
-                            <button class="btn btn-primary apply-now" data-service="Food License">Apply Now</button>
-                            <button class="btn btn-outline req-docs" data-service="Food License">Documents</button>
+                            <button class="btn btn-primary apply-now" data-service="परीक्षा पंजीकरण">अभी आवेदन करें</button>
+                            <button class="btn btn-outline req-docs" data-service="परीक्षा पंजीकरण">दस्तावेज़</button>
                         </div>
                     </div>
                 </div>
@@ -836,15 +1385,72 @@
                         <i class="fas fa-address-card"></i>
                     </div>
                     <div class="service-content">
-                        <h3>PAN Card</h3>
-                        <p>Permanent Account Number required for financial transactions</p>
+                        <h3>पैन कार्ड</h3>
+                        <p>वित्तीय लेनदेन के लिए आवश्यक स्थायी खाता संख्या</p>
                         <div class="service-price">
-                            <span class="service-old-price">₹599</span>
-                            <span>₹349</span>
+                            <span class="service-old-price">₹300</span>
+                            <span>₹149</span>
                         </div>
                         <div class="service-buttons">
-                            <button class="btn btn-primary apply-now" data-service="PAN Card">Apply Now</button>
-                            <button class="btn btn-outline req-docs" data-service="PAN Card">Documents</button>
+                            <button class="btn btn-primary apply-now" data-service="पैन कार्ड">अभी आवेदन करें</button>
+                            <button class="btn btn-outline req-docs" data-service="पैन कार्ड">दस्तावेज़</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- New Service Card 10 - Ration Card Online -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>राशन कार्ड ऑनलाइन</h3>
+                        <p>नया राशन कार्ड के लिए आवेदन करें या मौजूदा राशन कार्ड विवरण संशोधित करें</p>
+                        <div class="service-price">
+                            <span class="service-old-price">₹200</span>
+                            <span>₹79</span>
+                        </div>
+                        <div class="service-buttons">
+                            <button class="btn btn-primary apply-now" data-service="राशन कार्ड ऑनलाइन">अभी आवेदन करें</button>
+                            <button class="btn btn-outline req-docs" data-service="राशन कार्ड ऑनलाइन">दस्तावेज़</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- New Service Card 11 - Travel Services -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>यात्रा सेवाएँ</h3>
+                        <p>पासपोर्ट, वीजा और अन्य यात्रा संबंधी दस्तावेजों के लिए आवेदन करें</p>
+                        <div class="service-price">
+                            <span class="service-old-price">₹5000</span>
+                            <span>₹3499</span>
+                        </div>
+                        <div class="service-buttons">
+                            <button class="btn btn-primary apply-now" data-service="यात्रा सेवाएँ">अभी आवेदन करें</button>
+                            <button class="btn btn-outline req-docs" data-service="यात्रा सेवाएँ">दस्तावेज़</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- New Service Card 12 - Pensions -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>पेंशन</h3>
+                        <p>सरकारी पेंशन योजनाओं और सेवानिवृत्ति लाभों के लिए आवेदन करें</p>
+                        <div class="service-price">
+                            <span class="service-old-price">₹1000</span>
+                            <span>₹699</span>
+                        </div>
+                        <div class="service-buttons">
+                            <button class="btn btn-primary apply-now" data-service="पेंशन">अभी आवेदन करें</button>
+                            <button class="btn btn-outline req-docs" data-service="पेंशन">दस्तावेज़</button>
                         </div>
                     </div>
                 </div>
@@ -856,8 +1462,8 @@
     <section class="section" id="process">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">How It Works</h2>
-                <p class="section-subtitle">Simple 4-step process to get your documents</p>
+                <h2 class="section-title">यह कैसे काम करता है</h2>
+                <p class="section-subtitle">अपने दस्तावेज़ प्राप्त करने के लिए सरल 4-चरणीय प्रक्रिया</p>
             </div>
             
             <div class="process-steps">
@@ -866,8 +1472,8 @@
                     <div class="step-icon">
                         <i class="fas fa-file-alt"></i>
                     </div>
-                    <h4>Select Service</h4>
-                    <p>Choose the document you need from our services</p>
+                    <h4>सेवा चुनें</h4>
+                    <p>हमारी सेवाओं में से आपको जिस दस्तावेज़ की आवश्यकता है उसे चुनें</p>
                 </div>
                 
                 <!-- Step 2 -->
@@ -875,8 +1481,8 @@
                     <div class="step-icon">
                         <i class="fas fa-edit"></i>
                     </div>
-                    <h4>Fill Details</h4>
-                    <p>Complete our simple online form with your information</p>
+                    <h4>विवरण भरें</h4>
+                    <p>अपनी जानकारी के साथ हमारा सरल ऑनलाइन फॉर्म पूरा करें</p>
                 </div>
                 
                 <!-- Step 3 -->
@@ -884,8 +1490,8 @@
                     <div class="step-icon">
                         <i class="fas fa-cloud-upload-alt"></i>
                     </div>
-                    <h4>Upload Documents</h4>
-                    <p>Securely upload required documents</p>
+                    <h4>दस्तावेज़ अपलोड करें</h4>
+                    <p>सुरक्षित रूप से आवश्यक दस्तावेज़ अपलोड करें</p>
                 </div>
                 
                 <!-- Step 4 -->
@@ -893,8 +1499,8 @@
                     <div class="step-icon">
                         <i class="fas fa-check-circle"></i>
                     </div>
-                    <h4>Get Approved</h4>
-                    <p>Receive your document with our expert guidance</p>
+                    <h4>अनुमोदित प्राप्त करें</h4>
+                    <p>अपना दस्तावेज़ तेज़, सुरक्षित और परेशानी मुक्त घर बैठे प्राप्त करें!</p>
                 </div>
             </div>
         </div>
@@ -904,10 +1510,10 @@
     <div class="container">
         <div class="cta-section">
             <div class="cta-content">
-                <h2>Ready to Get Your Documents?</h2>
-                <p>Join thousands of satisfied customers who have streamlined their document process</p>
-                <a href="https://wa.me/918055698328" class="btn btn-whatsapp">
-                    <i class="fab fa-whatsapp"></i> Say Hello — We’re Ready to Help!
+                <h2>अपने दस्तावेज़ प्राप्त करने के लिए तैयार हैं?</h2>
+                <p>हजारों संतुष्ट ग्राहकों में शामिल हों जिन्होंने अपनी दस्तावेज़ प्रक्रिया को सुव्यवस्थित किया है</p>
+                <a href="https://wa.me/+919322346340" class="btn btn-whatsapp">
+                    <i class="fab fa-whatsapp"></i> हेलो बोलें - हम मदद के लिए तैयार हैं!
                 </a>
             </div>
         </div>
@@ -919,7 +1525,7 @@
             <div class="footer-content">
                 <div class="footer-column">
                     <h3>DocSwift</h3>
-                    <p style="color: rgba(255,255,255,0.7); margin-bottom: 15px;">Your premium partner for all government document services.</p>
+                    <p style="color: rgba(255,255,255,0.7); margin-bottom: 15px;">सभी सरकारी दस्तावेज़ सेवाओं के लिए आपका प्रीमियम साझेदार</p>
                     <div class="social-links">
                         <a href="https://shorturl.at/keN9O"><i class="fab fa-facebook-f"></i></a>
                         <a href="https://shorturl.at/KfFTv"><i class="fab fa-instagram"></i></a>
@@ -929,22 +1535,23 @@
                 </div>
                 
                 <div class="footer-column">
-                    <h3>Our Services</h3>
+                    <h3>हमारी सेवाएँ</h3>
                     <ul class="footer-links">
-                        <li><a href="#services"><i class="fas fa-chevron-right"></i> Caste Certificate</a></li>
-                        <li><a href="#services"><i class="fas fa-chevron-right"></i> Income Certificate</a></li>
-                        <li><a href="#services"><i class="fas fa-chevron-right"></i> Domicile Certificate</a></li>
-                        <li><a href="#services"><i class="fas fa-chevron-right"></i> Driving License</a></li>
-                        <li><a href="#services"><i class="fas fa-chevron-right"></i> PAN Card</a></li>
+                        <li><a href="#services"><i class="fas fa-chevron-right"></i> जाति प्रमाण पत्र</a></li>
+                        <li><a href="#services"><i class="fas fa-chevron-right"></i> आय प्रमाण पत्र</a></li>
+                        <li><a href="#services"><i class="fas fa-chevron-right"></i> मूल निवासी प्रमाण पत्र</a></li>
+                        <li><a href="#services"><i class="fas fa-chevron-right"></i> ड्राइविंग लाइसेंस</a></li>
+                        <li><a href="#services"><i class="fas fa-chevron-right"></i> पैन कार्ड</a></li>
+                        <li><a href="#services"><i class="fas fa-chevron-right"></i> राशन कार्ड</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-column">
-                    <h3>Contact Us</h3>
+                    <h3>हमसे संपर्क करें</h3>
                     <ul class="footer-contact">
                         <li>
                             <i class="fas fa-map-marker-alt"></i>
-                            <div>NexGenAiTech Jamsadia kushinagar 274409 </div>
+                            <div>जमसाडिया कुशीनगर 274409</div>
                         </li>
                         <li>
                             <i class="fas fa-envelope"></i>
@@ -952,14 +1559,19 @@
                         </li>
                         <li>
                             <i class="fab fa-whatsapp"></i>
-                            <div>+91 80XXXXX328 </div>
+                            <div>+91 91XXXXX328</div>
                         </li>
                     </ul>
+                    
+                    <!-- NexGenAiTech Button -->
+                    <a href="https://shorturl.at/keN9O" target="_blank" class="nexgen-btn">
+                        <i class="fas fa-external-link-alt"></i> NexGenAiTech पर जाएँ
+                    </a>
                 </div>
             </div>
             
             <div class="copyright">
-                &copy; 2025 NexGenAiTech. All Rights Reserved. | Designed for India with Love
+                &copy; 2025 NexGenAiTech. सर्वाधिकार सुरक्षित | DocSwift
             </div>
         </div>
     </footer>
@@ -967,84 +1579,121 @@
     <script>
         // Document requirements for each service
         const documentRequirements = {
-            "Caste Certificate": [
-                "Aadhaar Card (Photo)",
-                "Ration Card (Photo)",
-                "Passport size photo",
-                "Self-declaration (if Available)",
-                "Pan Card (if Available)",
-                
+            "जाति प्रमाण पत्र": [
+                "आधार कार्ड (फोटो)",
+                "राशन कार्ड (फोटो)",
+                "पासपोर्ट साइज फोटो",
+                "स्व-घोषणा (यदि उपलब्ध हो)",
+                "पैन कार्ड (यदि उपलब्ध हो)",
             ],
-            "Income Certificate": [
-                "Aadhaar Card (Photo)",
-                "Ration Card (Photo)",
-                "Passport size photo",
-                "Self-declaration (if Available)",
-                "Pan Card (if Available)",
-                "Salary Slips if Available (Last 3 months)",
-                
-               
+            "आय प्रमाण पत्र": [
+                "आधार कार्ड (फोटो)",
+                "राशन कार्ड (फोटो)",
+                "पासपोर्ट साइज फोटो",
+                "स्व-घोषणा (यदि उपलब्ध हो)",
+                "पैन कार्ड (यदि उपलब्ध हो)",
+                "वेतन पर्ची यदि उपलब्ध हो (अंतिम 3 महीने)",
             ],
-            "Domicile Certificate": [
-                "Aadhaar Card (Photo)",
-                "Ration Card (Photo)",
-                "Passport size photo",
-                "Self-declaration (if Available)",
-                "Pan Card (if Available)",
-                
+            "मूल निवासी प्रमाण पत्र": [
+                "आधार कार्ड (फोटो)",
+                "राशन कार्ड (फोटो)",
+                "पासपोर्ट साइज फोटो",
+                "स्व-घोषणा (यदि उपलब्ध हो)",
+                "पैन कार्ड (यदि उपलब्ध हो)",
             ],
-            "Birth Certificate": [
-                "Hospital Birth Record",
-                "Parent's ID Proof",
-                "Parent's Marriage Certificate",
-                "Proof of Residence",
-                "Applicant's ID Proof"
+            "जन्म प्रमाण पत्र": [
+                "अस्पताल जन्म रिकॉर्ड",
+                "माता-पिता का आईडी प्रूफ",
+                "माता-पिता का विवाह प्रमाणपत्र",
+                "निवास प्रमाण",
+                "आवेदक का आईडी प्रूफ"
             ],
-            "Death Certificate": [
-                 "Aadhaar Card (Photo)",
-                "Passport size photo",
-                "Hospital Death Record",
-                "Applicant's ID Proof",
-                "Deceased ID Proof",
-                "Proof of Residence",
-                "Relationship Proof"
+            "मृत्यु प्रमाण पत्र": [
+                 "आधार कार्ड (फोटो)",
+                "पासपोर्ट साइज फोटो",
+                "अस्पताल मृत्यु रिकॉर्ड",
+                "आवेदक का आईडी प्रूफ",
+                "मृतक का आईडी प्रूफ",
+                "निवास प्रमाण",
+                "रिश्ते का प्रमाण"
             ],
-            "Driving License": [
-                "Aadhaar Card (Copy)",
-                "Proof of Age (Birth Certificate)",
-                "Proof of Residence",
-                "Passport Size Photos (2)",
-                "Medical Certificate",
-                "Learner's License"
+            "ड्राइविंग लाइसेंस": [
+                "आधार कार्ड (कॉपी)",
+                "आयु प्रमाण (जन्म प्रमाणपत्र)",
+                "निवास प्रमाण",
+                "पासपोर्ट साइज फोटो (2)",
+                "चिकित्सा प्रमाणपत्र",
+                "लर्नर लाइसेंस"
             ],
-            "Shop License": [
-                "Aadhaar Card (Photo)",
-                "PAN Card (Copy)",
-                "Proof of Business Address",
-                "Partnership Deed (if applicable)",
-                "Rent Agreement/Property Papers",
-                "Passport Size Photos (2)"
+            "छात्रवृत्ति पंजीकरण": [
+                "आधार कार्ड (फोटो)",
+                "आय प्रमाणपत्र",
+                "जाति प्रमाण पत्र",
+                "मूल निवासी प्रमाण पत्र",
+                "बैंक पासबुक",
+                "पासपोर्ट साइज फोटो"
             ],
-            "Food License": [
-                "Aadhaar Card (Copy)",
-                "PAN Card (Copy)",
-                "Caste Certificate",
-                "Class X & XII Marksheets",
-                "Passport Size Photos "
-               
+            "परीक्षा पंजीकरण": [
+                "आधार कार्ड (कॉपी)",
+                "पैन कार्ड (कॉपी)",
+                "जाति प्रमाण पत्र",
+                "कक्षा X और XII के अंकपत्र",
+                "पासपोर्ट साइज फोटो"
             ],
-            "PAN Card": [
-                "Aadhaar Card (Copy)",
-                "Proof of Identity",
-                "Proof of Address",
-                "Passport Size Photo",
-                "Date of Birth Proof",
-                "Application Form (Signed)"
+            "पैन कार्ड": [
+                "आधार कार्ड (कॉपी)",
+                "पहचान प्रमाण",
+                "पता प्रमाण",
+                "पासपोर्ट साइज फोटो",
+                "जन्म तिथि प्रमाण",
+                "आवेदन पत्र (हस्ताक्षरित)"
+            ],
+            // New services documents
+            "राशन कार्ड ऑनलाइन": [
+                "आधार कार्ड (कॉपी)",
+                "निवास प्रमाण",
+                "परिवार के सदस्यों का विवरण",
+                "पासपोर्ट साइज फोटो",
+                "आय प्रमाणपत्र",
+                "मौजूदा राशन कार्ड (यदि कोई हो)"
+            ],
+            "यात्रा सेवाएँ": [
+                "पासपोर्ट आवेदन पत्र",
+                "जन्म प्रमाणपत्र",
+                "पता प्रमाण",
+                "आईडी प्रूफ",
+                "पासपोर्ट साइज फोटो",
+                "यात्रा कार्यक्रम"
+            ],
+            "पेंशन": [
+                "आधार कार्ड (कॉपी)",
+                "बैंक पासबुक",
+                "आयु प्रमाण",
+                "सेवा प्रमाणपत्र",
+                "पेंशन आवेदन पत्र",
+                "नामांकित व्यक्ति का विवरण"
             ]
         };
 
+        // Google Form URLs for each service
+        const googleFormUrls = {
+            "जाति प्रमाण पत्र": "https://form.gle/MYoawT5iR1GRnCom9",
+            "आय प्रमाण पत्र": "https://form.gle/jT3CpbofTKiMbPik7",
+            "मूल निवासी प्रमाण पत्र": "https://form.gle/PsHvWx4r6topiQeMA",
+            "जन्म प्रमाण पत्र": "https://form.gle/Jh6dkjm4XgiREmRq9",
+            "मृत्यु प्रमाण पत्र": "https://form.gle/example5",
+            "ड्राइविंग लाइसेंस": "https://form.gle/example6",
+            "छात्रवृत्ति पंजीकरण": "https://forms.gle/example7",
+            "परीक्षा पंजीकरण": "https://form.gle/example8",
+            "पैन कार्ड": "https://forms.gle/example9",
+            // New services Google Forms
+            "राशन कार्ड ऑनलाइन": "https://forms.gle/example10",
+            "यात्रा सेवाएँ": "https://forms.gle/example11",
+            "पेंशन": "https://forms.gle/example12"
+        };
+
         // WhatsApp number
-        const whatsappNumber = "+918055698328";
+        const whatsappNumber = "+919322346340";
 
         // Modal functionality
         const modal = document.getElementById('documentModal');
@@ -1052,16 +1701,72 @@
         const modalTitle = document.getElementById('modalServiceTitle');
         const documentsList = document.getElementById('documentsList');
         const whatsappApplyBtn = document.getElementById('whatsappApplyBtn');
+        
+        // Apply Options Modal elements
+        const applyOptionsModal = document.getElementById('applyOptionsModal');
+        const closeApplyOptionsModal = document.getElementById('closeApplyOptionsModal');
+        const applyServiceTitle = document.getElementById('applyServiceTitle');
+        const googleFormBtn = document.getElementById('googleFormBtn');
+        const whatsappApplyBtn2 = document.getElementById('whatsappApplyBtn2');
+        
+        // Referral elements
+        const referralModal = document.getElementById('referralModal');
+        const closeReferralModal = document.getElementById('closeReferralModal');
+        const referralFloatingBtn = document.getElementById('referralFloatingBtn');
+        const referralLink = document.getElementById('referralLink');
+        const copyReferralBtn = document.getElementById('copyReferralBtn');
+        const referralCloseBtn = document.getElementById('referralCloseBtn');
+        const whatsappShareBtn = document.getElementById('whatsappShareBtn');
+        const facebookShareBtn = document.getElementById('facebookShareBtn');
+        const twitterShareBtn = document.getElementById('twitterShareBtn');
+        const linkShareBtn = document.getElementById('linkShareBtn');
+        const fixedCloseBtn = document.getElementById('fixedCloseBtn');
+        
+        // Name input elements
+        const referralNameInput = document.getElementById('referralName');
+        const generateReferralBtn = document.getElementById('generateReferralBtn');
+        const nameInputSection = document.getElementById('nameInputSection');
+        const referralResultSection = document.getElementById('referralResultSection');
+        const nameError = document.getElementById('nameError');
 
-        // Apply Now buttons
+        // Generate referral code based on name
+        function generateReferralLink(name) {
+            // Clean the name and get first 3 letters
+            const cleanedName = name.replace(/\s+/g, '').toUpperCase();
+            const namePart = cleanedName.substring(0, 6);
+            
+            // Generate random 4-digit number
+            const randomNum = Math.floor(100 + Math.random() * 900);
+            
+            return `https://shorturl.at/nmvgI?ref=${namePart}${randomNum}`;
+        }
+
+        // Apply Now buttons - show options modal
         document.querySelectorAll('.apply-now').forEach(button => {
             button.addEventListener('click', function() {
                 const serviceName = this.getAttribute('data-service');
-                const whatsappMessage = `Hello, I would like to apply for ${serviceName}. Please send me list of  the required documents and application process.`;
-                const encodedMessage = encodeURIComponent(whatsappMessage);
-                window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
+                showApplyOptionsModal(serviceName);
             });
         });
+
+        function showApplyOptionsModal(serviceName) {
+            applyServiceTitle.textContent = `${serviceName} के लिए आवेदन करें`;
+            
+            // Set Google Form URL
+            if (googleFormUrls[serviceName]) {
+                googleFormBtn.href = googleFormUrls[serviceName];
+            } else {
+                googleFormBtn.href = "https://forms.gle/default";
+            }
+            
+            // Set WhatsApp link
+            const whatsappMessage = `नमस्ते, मैं ${serviceName} के लिए आवेदन करना चाहता/चाहती हूँ। कृपया प्रक्रिया बताएँ।`;
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+            whatsappApplyBtn2.href = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+            
+            applyOptionsModal.style.display = 'flex';
+            fixedCloseBtn.style.display = 'flex';
+        }
 
         // Required Documents buttons
         document.querySelectorAll('.req-docs').forEach(button => {
@@ -1082,7 +1787,7 @@
                     documentsList.appendChild(li);
                 });
                 
-                const whatsappMessage = `Hi, can you please send me the list of documents needed for ${serviceName}. Thanks a lot!.`;
+                const whatsappMessage = `नमस्ते, कृपया मुझे ${serviceName} के लिए आवश्यक दस्तावेज़ों की सूची भेजें। बहुत धन्यवाद!`;
                 const encodedMessage = encodeURIComponent(whatsappMessage);
                 whatsappApplyBtn.href = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
                 
@@ -1090,13 +1795,140 @@
             }
         }
 
+        // Close modals
         closeModal.addEventListener('click', function() {
             modal.style.display = 'none';
         });
-
+        
+        closeApplyOptionsModal.addEventListener('click', function() {
+            applyOptionsModal.style.display = 'none';
+            fixedCloseBtn.style.display = 'none';
+        });
+        
+        // Referral modal functionality
+        referralFloatingBtn.addEventListener('click', function() {
+            referralModal.style.display = 'flex';
+            fixedCloseBtn.style.display = 'flex';
+        });
+        
+        closeReferralModal.addEventListener('click', function() {
+            referralModal.style.display = 'none';
+            fixedCloseBtn.style.display = 'none';
+        });
+        
+        fixedCloseBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+            referralModal.style.display = 'none';
+            applyOptionsModal.style.display = 'none';
+            fixedCloseBtn.style.display = 'none';
+        });
+        
+        // UPDATED: "Start Earning Now" opens Google Form
+        referralCloseBtn.addEventListener('click', function() {
+            // Open Google Form in new tab
+            window.open('https://forms.gle/xHczXTGvhT3JJGF39', '_blank');
+            
+            // Close modal
+            referralModal.style.display = 'none';
+            fixedCloseBtn.style.display = 'none';
+        });
+        
         window.addEventListener('click', function(event) {
             if (event.target === modal) {
                 modal.style.display = 'none';
+            }
+            if (event.target === referralModal) {
+                referralModal.style.display = 'none';
+                fixedCloseBtn.style.display = 'none';
+            }
+            if (event.target === applyOptionsModal) {
+                applyOptionsModal.style.display = 'none';
+                fixedCloseBtn.style.display = 'none';
+            }
+        });
+        
+        // Copy referral link
+        copyReferralBtn.addEventListener('click', function() {
+            const tempInput = document.createElement('input');
+            document.body.appendChild(tempInput);
+            tempInput.value = referralLink.textContent;
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            
+            // Show copied feedback
+            const originalText = copyReferralBtn.textContent;
+            copyReferralBtn.textContent = 'कॉपी हो गया!';
+            setTimeout(() => {
+                copyReferralBtn.textContent = originalText;
+            }, 2000);
+        });
+        
+        // Social sharing
+        whatsappShareBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const message = `DocSwift के साथ बिना किसी परेशानी के सरकारी दस्तावेज़ प्राप्त करें! देखें:${referralLink.textContent}`;
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/?text=${encodedMessage}`, '_blank');
+        });
+        
+        facebookShareBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(referralLink.textContent)}`;
+            window.open(url, '_blank', 'width=600,height=400');
+        });
+        
+        twitterShareBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const text = `@DocSwift के साथ बिना किसी परेशानी के सरकारी दस्तावेज़ प्राप्त करें! देखें:`;
+            const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(referralLink.textContent)}`;
+            window.open(url, '_blank', 'width=600,height=400');
+        });
+        
+        linkShareBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (navigator.share) {
+                navigator.share({
+                    title: 'DocSwift रेफ़रल',
+                    text: 'DocSwift के साथ बिना किसी परेशानी के सरकारी दस्तावेज़ प्राप्त करें!',
+                    url: referralLink.textContent
+                })
+                .catch(console.error);
+            } else {
+                copyReferralBtn.click();
+            }
+        });
+        
+        // Generate referral code from name
+        generateReferralBtn.addEventListener('click', function() {
+            const name = referralNameInput.value.trim();
+            
+            if (!name) {
+                nameError.style.display = 'block';
+                return;
+            }
+            
+            nameError.style.display = 'none';
+            
+            // Generate referral link
+            const link = generateReferralLink(name);
+            referralLink.textContent = link;
+            
+            // Show result section
+            referralResultSection.style.display = 'block';
+        });
+        
+        // UPDATED: Show referral modal at 80% scroll
+        window.addEventListener('scroll', function() {
+            const scrollPosition = window.scrollY + window.innerHeight;
+            const totalHeight = document.documentElement.scrollHeight;
+            const scrollPercentage = (scrollPosition / totalHeight) * 100;
+
+            // Show when scrolled to 80% of page
+            if (scrollPercentage >= 95 && !sessionStorage.getItem('referralShown')) {
+                referralModal.style.display = 'flex';
+                fixedCloseBtn.style.display = 'flex';
+                sessionStorage.setItem('referralShown', 'true');
             }
         });
     </script>
