@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Information Collector</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            width: 100%;
+            max-width: 1200px;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(to right, #fff, #ffdd00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            width: 100%;
+            max-width: 1200px;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 10px;
+        }
+        
+        .card h2 i {
+            color: #ffdd00;
+        }
+        
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .info-label {
+            font-weight: 600;
+            flex: 1;
+        }
+        
+        .info-value {
+            flex: 2;
+            text-align: right;
+            word-break: break-word;
+            color: #ffdd00;
+        }
+        
+        .status-bar {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 30px;
+            text-align: center;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            max-width: 1200px;
+            width: 100%;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #ffdd00;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .success {
+            color: #4ade80;
+        }
+        
+        .error {
+            color: #f87171;
+        }
+        
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            max-width: 1200px;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-item {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .info-value {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>User Information Collector</h1>
+        <p class="subtitle">This page automatically collects and displays your device and connection information</p>
+    </div>
+    
+    <div class="container">
+        <div class="card">
+            <h2><i>📍</i> Location & Network</h2>
+            <div class="info-item">
+                <span class="info-label">IP Address:</span>
+                <span class="info-value" id="ip">Detecting...</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Location:</span>
+                <span class="info-value" id="location">Detecting...</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Timezone:</span>
+                <span class="info-value" id="timezone">Detecting...</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Local Time:</span>
+                <span class="info-value" id="local-time">Detecting...</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">ISP:</span>
+                <span class="info-value" id="isp">Detecting...</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Network Type:</span>
+                <span class="info-value" id="network-type">Detecting...</span>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2><i>💻</i> Device Information</h2>
+            <div class="info-item">
+                <span class="info-label">Device Type:</span>
+                <span class="info-value" id="device-type">Detecting...</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Operating System:</span>
+                <span class="info-value" id="os">Detecting...</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Browser:</span>
+                <span class="info-value" id="browser">Detecting...</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Browser Version:</span>
+                <span class="info-value" id="browser-version">Detecting...</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Screen Resolution:</span>
+                <span class="info-value" id="screen">Detecting...</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Color Depth:</span>
+                <span class="info-value" id="color-depth">Detecting...</span>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2><i>🌐</i> Browser Details</h2>
+            <div class="info-item">
+                <span class="info-label">User Agent:</span>
+                <span class="info-value" id="user-agent">Detecting...</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Language:</span>
+                <span class="info-value" id="language">Detecting...</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Platform:</span>
+                <span class="info-value" id="platform">Detecting...</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Cookies Enabled:</span>
+                <span class="info-value" id="cookies">Detecting...</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">JavaScript Enabled:</span>
+                <span class="info-value" id="javascript">Detecting...</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Do Not Track:</span>
+                <span class="info-value" id="dnt">Detecting...</span>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2><i>⚡</i> Performance & Hardware</h2>
+            <div class="info-item">
+                <span class="info-label">CPU Cores:</span>
+                <span class="info-value" id="cpu-cores">Detecting...</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Device Memory:</span>
+                <span class="info-value" id="device-memory">Detecting...</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Connection Speed:</span>
+                <span class="info-value" id="connection-speed">Detecting...</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Battery Status:</span>
+                <span class="info-value" id="battery">Detecting...</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Touch Support:</span>
+                <span class="info-value" id="touch">Detecting...</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">WebRTC Support:</span>
+                <span class="info-value" id="webrtc">Detecting...</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="status-bar" id="status-bar">
+        <span class="loading"></span>
+        <span id="status-text">Collecting your information...</span>
+    </div>
+    
+    <div class="footer">
+        <p>This information is automatically collected and saved for analytics purposes.</p>
+        <p>No personal data is stored without your consent.</p>
+    </div>
+
+    <script>
+        // Google Script URL - YAHAN APNA SCRIPT URL DALNA HAI
+        const GOOGLE_SCRIPT_URL = 'YOUR_SCRIPT_URL_HERE';
+        
+        // Enhanced device detection functions
+        function getDeviceType() {
+            const userAgent = navigator.userAgent;
+            if (/Mobi|Android/i.test(userAgent)) return "Mobile";
+            if (/Tablet|iPad/i.test(userAgent)) return "Tablet";
+            return "Desktop";
+        }
+
+        function getBrowser() {
+            const userAgent = navigator.userAgent;
+            const browsers = [
+                { name: "Chrome", pattern: /Chrome/ },
+                { name: "Firefox", pattern: /Firefox/ },
+                { name: "Safari", pattern: /Safari/ },
+                { name: "Edge", pattern: /Edg/ },
+                { name: "Opera", pattern: /OPR/ },
+                { name: "Internet Explorer", pattern: /Trident/ }
+            ];
+            
+            for (let browser of browsers) {
+                if (browser.pattern.test(userAgent)) return browser.name;
+            }
+            return "Unknown";
+        }
+
+        function getOS() {
+            const userAgent = navigator.userAgent;
+            const platform = navigator.platform;
+            
+            if (/Win/.test(platform)) return "Windows";
+            if (/Mac/.test(platform)) return "MacOS";
+            if (/Linux/.test(platform)) return "Linux";
+            if (/Android/.test(userAgent)) return "Android";
+            if (/iOS|iPhone|iPad|iPod/.test(userAgent)) return "iOS";
+            return "Unknown";
+        }
+
+        function getBrowserVersion() {
+            const userAgent = navigator.userAgent;
+            let version = "Unknown";
+            
+            // Extract version from user agent string
+            if (userAgent.indexOf("Chrome") !== -1) {
+                const temp = userAgent.match(/Chrome\/([0-9.]+)/);
+                version = temp ? temp[1] : "Unknown";
+            } else if (userAgent.indexOf("Firefox") !== -1) {
+                const temp = userAgent.match(/Firefox\/([0-9.]+)/);
+                version = temp ? temp[1] : "Unknown";
+            } else if (userAgent.indexOf("Safari") !== -1) {
+                const temp = userAgent.match(/Version\/([0-9.]+)/);
+                version = temp ? temp[1] : "Unknown";
+            } else if (userAgent.indexOf("Edg") !== -1) {
+                const temp = userAgent.match(/Edg\/([0-9.]+)/);
+                version = temp ? temp[1] : "Unknown";
+            }
+            
+            return version;
+        }
+
+        function getConnectionType() {
+            if (navigator.connection) {
+                return navigator.connection.effectiveType || "Unknown";
+            }
+            return "Unknown";
+        }
+
+        function getConnectionSpeed() {
+            if (navigator.connection) {
+                return navigator.connection.downlink ? `${navigator.connection.downlink} Mbps` : "Unknown";
+            }
+            return "Unknown";
+        }
+
+        function updateLocalTime() {
+            const now = new Date();
+            document.getElementById('local-time').textContent = now.toLocaleString();
+        }
+
+        // Collect and display all information
+        function collectAndDisplayInfo() {
+            // Update basic information
+            document.getElementById('timezone').textContent = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            document.getElementById('browser').textContent = getBrowser();
+            document.getElementById('browser-version').textContent = getBrowserVersion();
+            document.getElementById('os').textContent = getOS();
+            document.getElementById('device-type').textContent = getDeviceType();
+            document.getElementById('screen').textContent = `${screen.width} x ${screen.height}`;
+            document.getElementById('color-depth').textContent = `${screen.colorDepth} bit`;
+            document.getElementById('language').textContent = navigator.language || navigator.userLanguage || "Unknown";
+            document.getElementById('platform').textContent = navigator.platform;
+            document.getElementById('cookies').textContent = navigator.cookieEnabled ? "Yes" : "No";
+            document.getElementById('javascript').textContent = "Yes";
+            document.getElementById('dnt').textContent = navigator.doNotTrack || "Not set";
+            document.getElementById('user-agent').textContent = navigator.userAgent;
+            document.getElementById('cpu-cores').textContent = navigator.hardwareConcurrency || "Unknown";
+            document.getElementById('device-memory').textContent = navigator.deviceMemory ? `${navigator.deviceMemory} GB` : "Unknown";
+            document.getElementById('connection-speed').textContent = getConnectionSpeed();
+            document.getElementById('network-type').textContent = getConnectionType();
+            document.getElementById('touch').textContent = 'ontouchstart' in window ? "Yes" : "No";
+            document.getElementById('webrtc').textContent = !!window.RTCPeerConnection ? "Yes" : "No";
+
+            // Get battery status if available
+            if ('getBattery' in navigator) {
+                navigator.getBattery().then(function(battery) {
+                    document.getElementById('battery').textContent = `${Math.round(battery.level * 100)}% (${battery.charging ? 'Charging' : 'Not charging'})`;
+                });
+            } else {
+                document.getElementById('battery').textContent = "Not available";
+            }
+
+            // Get IP and location information
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('ip').textContent = data.ip;
+                    
+                    // Get detailed location information
+                    return fetch(`https://ipapi.co/${data.ip}/json/`);
+                })
+                .then(response => response.json())
+                .then(locationData => {
+                    const location = `${locationData.city}, ${locationData.region}, ${locationData.country_name}`;
+                    document.getElementById('location').textContent = location;
+                    document.getElementById('isp').textContent = locationData.org || "Unknown";
+                    
+                    // Prepare data for saving
+                    const userData = collectUserData(locationData);
+                    saveToGoogleDocs(userData);
+                })
+                .catch(error => {
+                    console.error("Error fetching location data:", error);
+                    document.getElementById('ip').textContent = "Unable to fetch";
+                    document.getElementById('location').textContent = "Unable to fetch";
+                    document.getElementById('isp').textContent = "Unable to fetch";
+                    
+                    // Still save whatever data we have
+                    const userData = collectUserData();
+                    saveToGoogleDocs(userData);
+                });
+        }
+
+        // Collect all user data into an object
+        function collectUserData(locationData = {}) {
+            return {
+                timestamp: new Date().toISOString(),
+                ip: document.getElementById('ip').textContent,
+                location: document.getElementById('location').textContent,
+                timezone: document.getElementById('timezone').textContent,
+                localTime: new Date().toLocaleString(),
+                browser: document.getElementById('browser').textContent,
+                browserVersion: document.getElementById('browser-version').textContent,
+                os: document.getElementById('os').textContent,
+                deviceType: document.getElementById('device-type').textContent,
+                screen: document.getElementById('screen').textContent,
+                colorDepth: document.getElementById('color-depth').textContent,
+                language: document.getElementById('language').textContent,
+                platform: document.getElementById('platform').textContent,
+                cookies: document.getElementById('cookies').textContent,
+                javascript: document.getElementById('javascript').textContent,
+                dnt: document.getElementById('dnt').textContent,
+                cpuCores: document.getElementById('cpu-cores').textContent,
+                deviceMemory: document.getElementById('device-memory').textContent,
+                connectionSpeed: document.getElementById('connection-speed').textContent,
+                networkType: document.getElementById('network-type').textContent,
+                touch: document.getElementById('touch').textContent,
+                webrtc: document.getElementById('webrtc').textContent,
+                battery: document.getElementById('battery').textContent,
+                isp: document.getElementById('isp').textContent,
+                userAgent: navigator.userAgent,
+                referrer: document.referrer || "Direct visit"
+            };
+        }
+
+        // Function to save data to Google Docs using Google Apps Script
+        function saveToGoogleDocs(userData) {
+            // Check if script URL is set
+            if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL === 'AKfycbxcQgO_5_UGKZ-T1fL5G6CKs42RN6i9xdFN9CI5n9G-IfkOE7eIGPIWXl1wdIszQnWsHw') {
+                const statusBar = document.getElementById('status-bar');
+                statusBar.innerHTML = '<span class="error">⚠ Please set Google Script URL in code</span>';
+                console.log("User data (not saved):", userData);
+                return;
+            }
+            
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(userData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                const statusBar = document.getElementById('status-bar');
+                if (data.result === 'success') {
+                    statusBar.innerHTML = '<span class="success">✓ Information successfully collected and saved to Google Sheets!</span>';
+                } else {
+                    statusBar.innerHTML = '<span class="error">⚠ Error saving to Google Sheets</span>';
+                }
+            })
+            .catch(error => {
+                console.error('Error saving data:', error);
+                const statusBar = document.getElementById('status-bar');
+                statusBar.innerHTML = '<span class="error">⚠ Error connecting to Google Sheets</span>';
+            });
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            collectAndDisplayInfo();
+            updateLocalTime();
+            setInterval(updateLocalTime, 1000);
+        });
+    </script>
+</body>
+</html>
