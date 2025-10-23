@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexGenAiTech AI Assistant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #0a0f1e;   /* Premium Dark Blue */
+            --secondary-color: #1a243d; /* Rich Navy */
+            --accent-color: #c9a96e;    /* Premium Gold */
+            --accent-light: #e4d4b4;    /* Light Gold */
+            --text-color: #e8eef7;
+            --text-secondary: #b8c2d9;
+            --bg-color: #0d1425;
+            --card-bg: #151e33;
+            --input-bg: #1c2845;
+            --border-color: #2a3755;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --header-bg: rgba(13, 20, 37, 0.95);
+            --message-user-bg: #1a2840;
+            --message-bot-bg: #1e2c47;
+            --message-user-text: #e8eef7;
+            --message-bot-text: #e8eef7;
+            --header-height: 49px;
+        }
+
+        body.dark-mode {
+            --primary-color: #0a0f1e;
+            --secondary-color: #1a243d;
+            --accent-color: #c9a96e;
+            --accent-light: #e4d4b4;
+            --text-color: #e8eef7;
+            --text-secondary: #b8c2d9;
+            --bg-color: #0d1425;
+            --card-bg: #151e33;
+            --input-bg: #1c2845;
+            --border-color: #2a3755;
+            --shadow-color: rgba(0, 0, 0, 0.5);
+            --header-bg: rgba(13, 20, 37, 0.95);
+            --message-user-bg: #1a2840;
+            --message-bot-bg: #1e2c47;
+            --message-user-text: #e8eef7;
+            --message-bot-text: #e8eef7;
+        }
+
+        body {
+            height: 100vh;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--text-color);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        /* Header styling */
+        .main-header {
+            background: var(--header-bg);
+            padding: 8px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 15px var(--shadow-color);
+            transition: background 0.3s, box-shadow 0.3s;
+            height: var(--header-height);
+            min-height: var(--header-height);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(201, 169, 110, 0.2);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-light));
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 1rem;
+        }
+
+        .logo-text {
+            font-weight: bold;
+            font-size: 1.4rem;
+            background: linear-gradient(to right, var(--accent-color), var(--accent-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0px 2px 3px var(--shadow-color);
+            letter-spacing: -0.5px;
+        }
+
+        .nexgen-part {
+            color: var(--accent-color);
+            font-weight: 800;
+        }
+
+        .ai-part {
+            color: var(--accent-light);
+            font-weight: 800;
+        }
+
+        .header-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .header-controls button {
+            background: rgba(201, 169, 110, 0.1);
+            color: var(--accent-color);
+            border: 1px solid rgba(201, 169, 110, 0.3);
+            padding: 6px 12px;
+            border-radius: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.3s, transform 0.2s;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .header-controls button:hover {
+            background: rgba(201, 169, 110, 0.2);
+            transform: translateY(-1px);
+        }
+
+        /* Chat area styling */
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            margin: 15px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 8px 25px var(--shadow-color);
+            overflow: hidden;
+            transition: background 0.3s, box-shadow 0.3s;
+            max-width: 1200px;
+            width: 95%;
+            align-self: center;
+            border: 1px solid rgba(201, 169, 110, 0.1);
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background: var(--bg-color);
+            transition: background 0.3s;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 10px 14px;
+            border-radius: 16px;
+            line-height: 1.4;
+            animation: fadeIn 0.3s ease;
+            box-shadow: 0 2px 8px var(--shadow-color);
+            font-size: 0.85rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .bot-message {
+            align-self: flex-start;
+            background: var(--message-bot-bg);
+            border-bottom-left-radius: 5px;
+            color: var(--message-bot-text);
+            transition: background 0.3s, color 0.3s;
+            border-left: 2px solid var(--accent-color);
+        }
+
+        .user-message {
+            align-self: flex-end;
+            background: var(--message-user-bg);
+            color: var(--message-user-text);
+            border-bottom-right-radius: 5px;
+            border-right: 2px solid var(--accent-color);
+        }
+
+        .message-content {
+            margin-bottom: 5px;
+        }
+
+        .timestamp {
+            font-size: 0.65rem;
+            text-align: right;
+            margin-top: 5px;
+            opacity: 0.7;
+            color: var(--text-secondary);
+        }
+
+        .chat-input-container {
+            display: flex;
+            flex-direction: column;
+            padding: 12px;
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            gap: 10px;
+            transition: background 0.3s, border-color 0.3s;
+        }
+
+        .input-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .image-preview-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 5px;
+        }
+
+        .image-upload-container {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .image-upload-label {
+            background: rgba(201, 169, 110, 0.1);
+            border: 1px dashed rgba(201, 169, 110, 0.5);
+            border-radius: 8px;
+            padding: 8px 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+            color: var(--accent-color);
+        }
+
+        .image-upload-label:hover {
+            background: rgba(201, 169, 110, 0.2);
+        }
+
+        #image-upload {
+            display: none;
+        }
+
+        .image-preview {
+            max-width: 100px;
+            max-height: 100px;
+            border-radius: 8px;
+            object-fit: cover;
+            display: none;
+            border: 1px solid var(--border-color);
+        }
+
+        .remove-image {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.7rem;
+            transition: background 0.3s;
+        }
+
+        .remove-image:hover {
+            background: #c0392b;
+        }
+
+        .chat-input {
+            flex: 1;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .chat-input input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            outline: none;
+            font-size: 0.85rem;
+            transition: border-color 0.3s;
+            background: var(--input-bg);
+            color: var(--text-color);
+        }
+
+        .chat-input input:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 2px rgba(201, 169, 110, 0.2);
+        }
+
+        .send-button {
+            background: var(--accent-color);
+            color: var(--primary-color);
+            border: none;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background 0.3s, transform 0.2s;
+            flex-shrink: 0;
+            font-weight: bold;
+        }
+
+        .send-button:hover {
+            background: var(--accent-light);
+            transform: scale(1.05);
+        }
+
+        .send-button:disabled {
+            background: #555;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .typing-indicator {
+            display: flex;
+            padding: 10px;
+            gap: 5px;
+            align-self: flex-start;
+        }
+
+        .typing-dot {
+            width: 7px;
+            height: 7px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: typingAnimation 1.4s infinite ease-in-out;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typingAnimation {
+            0%, 60%, 100% {
+                transform: translateY(0);
+                opacity: 0.6;
+            }
+            30% {
+                transform: translateY(-10px);
+                opacity: 1;
+            }
+        }
+
+        /* Suggestion chips styling */
+        .suggestion-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+
+        .suggestion-chip {
+            background: rgba(201, 169, 110, 0.1);
+            border: 1px solid rgba(201, 169, 110, 0.3);
+            border-radius: 14px;
+            padding: 6px 10px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--accent-color);
+        }
+
+        .suggestion-chip:hover {
+            background: rgba(201, 169, 110, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Program buttons styling */
+        .program-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .program-button {
+            background: rgba(201, 169, 110, 0.1);
+            color: var(--accent-color);
+            border: 1px solid rgba(201, 169, 110, 0.3);
+            border-radius: 16px;
+            padding: 8px 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-weight: 500;
+            font-size: 0.8rem;
+        }
+
+        .program-button:hover {
+            background: rgba(201, 169, 110, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px var(--shadow-color);
+        }
+
+        /* Footer with usage tips */
+        .chat-footer {
+            padding: 10px;
+            text-align: center;
+            background: var(--bg-color);
+            border-top: 1px solid var(--border-color);
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            transition: background 0.3s, border-color 0.3s;
+        }
+
+        /* Info Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+            color: var(--text-color);
+            transition: background 0.3s, color 0.3s;
+            border: 1px solid rgba(201, 169, 110, 0.1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .modal-header h2 {
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.3rem;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: var(--accent-color);
+        }
+
+        .config-group {
+            margin-bottom: 15px;
+            font-size: 0.85rem;
+        }
+
+        .config-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        .model-info {
+            background: rgba(201, 169, 110, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 0.8rem;
+            color: var(--text-color);
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .info-badge {
+            background: rgba(201, 169, 110, 0.1);
+            border-radius: 4px;
+            padding: 3px 6px;
+            font-size: 0.65rem;
+            color: var(--accent-color);
+            margin-top: 5px;
+            display: inline-block;
+            border: 1px solid rgba(201, 169, 110, 0.2);
+        }
+        
+        .source-indicator {
+            font-size: 0.65rem;
+            color: var(--text-secondary);
+            margin-top: 5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .message-image {
+            max-width: 200px;
+            border-radius: 8px;
+            margin-top: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Dark mode toggle */
+        .dark-mode-toggle {
+            position: relative;
+            width: 56px;
+            height: 28px;
+            background: var(--border-color);
+            border-radius: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 0 5px;
+            transition: background 0.3s;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .dark-mode-toggle.active {
+            background: var(--accent-color);
+        }
+
+        .dark-mode-toggle::before {
+            content: '';
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: white;
+            transition: transform 0.3s;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .dark-mode-toggle.active::before {
+            transform: translateX(28px);
+        }
+
+        .dark-mode-toggle i {
+            font-size: 0.7rem;
+            z-index: 1;
+        }
+
+        .dark-mode-toggle .fa-moon {
+            color: white;
+            margin-right: auto;
+        }
+
+        .dark-mode-toggle .fa-sun {
+            color: #f39c12;
+            margin-left: auto;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .main-header {
+                padding: 6px 12px;
+            }
+            
+            .logo-text {
+                font-size: 1.1rem;
+            }
+            
+            .header-controls button span {
+                display: none;
+            }
+            
+            .header-controls button {
+                padding: 5px 8px;
+            }
+            
+            .chat-container {
+                margin: 10px;
+                width: calc(100% - 20px);
+            }
+            
+            .message {
+                max-width: 90%;
+                font-size: 0.8rem;
+            }
+            
+            .image-upload-label span {
+                display: none;
+            }
+            
+            .send-button {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .input-row {
+                flex-wrap: wrap;
+            }
+            
+            .chat-input {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .chat-messages {
+                padding: 12px;
+            }
+            
+            .message {
+                padding: 8px 12px;
+                font-size: 0.8rem;
+            }
+            
+            .modal-content {
+                padding: 20px;
+            }
+            
+            .image-upload-label {
+                padding: 8px;
+            }
+            
+            .chat-input-container {
+                padding: 10px;
+            }
+            
+            .chat-input input {
+                padding: 10px 14px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main header with logo and controls -->
+    <div class="main-header">
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-robot"></i>
+            </div>
+            <h1 class="logo-text"><span class="nexgen-part">NexGenAiTech</span> <span class="ai-part">AI</span></h1>
+        </div>
+        <div class="header-controls">
+            <div class="dark-mode-toggle" id="dark-mode-toggle">
+                <i class="fas fa-moon"></i>
+                <i class="fas fa-sun"></i>
+            </div>
+            <button id="clear-chat-btn">
+                <i class="fas fa-broom"></i>
+                <span>Clear</span>
+            </button>
+            <button id="info-btn" title="About">
+                <i class="fas fa-info-circle"></i>
+                <span>About</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Chat container -->
+    <div class="chat-container">
+        <div class="chat-messages" id="chat-messages">
+            <div class="message bot-message">
+                <div class="message-content">
+                    <p>Hello there! 👋 I'm your NexGenAiTech AI Assistant, ready to help you discover our amazing digital solutions! 😊</p>
+                    <p>I can tell you all about our premium services, pricing, portfolio, and more. What would you like to know?</p>
+                    <div class="suggestion-chips">
+                        <div class="suggestion-chip" data-question="What is NexGenAiTech?">What is NexGenAiTech?</div>
+                        <div class="suggestion-chip" data-question="Tell me about your services">Our services</div>
+                        <div class="suggestion-chip" data-question="What is your pricing?">Pricing information</div>
+                        <div class="suggestion-chip" data-question="How can I contact you?">Contact information</div>
+                    </div>
+                    <p style="margin-top: 10px; font-size: 0.8rem;">You can also upload images and I'll help you analyze them! 📸</p>
+                </div>
+                <div class="timestamp">Just now</div>
+            </div>
+        </div>
+        
+        <div class="chat-input-container">
+            <div class="image-preview-container">
+                <img id="image-preview" class="image-preview">
+                <button class="remove-image" id="remove-image-btn">&times;</button>
+            </div>
+            
+            <div class="input-row">
+                <div class="image-upload-container">
+                    <label for="image-upload" class="image-upload-label">
+                        <i class="fas fa-image"></i>
+                        <span>Upload</span>
+                    </label>
+                    <input type="file" id="image-upload" accept="image/*">
+                </div>
+                
+                <div class="chat-input">
+                    <input type="text" id="user-input" placeholder="Ask me anything about NexGenAiTech...">
+                    <button class="send-button" id="send-btn">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-footer">
+            <p>Tip: Try asking about our services, pricing, portfolio, or upload an image and ask questions about it</p>
+        </div>
+    </div>
+
+    <!-- Info Modal -->
+    <div class="modal" id="info-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-info-circle"></i> About NexGenAiTech</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            
+            <div class="config-group">
+                <p>NexGenAiTech is a premium digital solutions agency based in Jamsaria, Kushinagar, Uttar Pradesh, focused on helping businesses grow through cutting-edge technology, design, and marketing solutions.</p>
+                
+                <div class="model-info">
+                    <p><strong>Our Services:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Website Development</li>
+                        <li>Graphic Designing</li>
+                        <li>Digital Marketing</li>
+                        <li>AI Business Automation</li>
+                        <li>E-Commerce Setup</li>
+                        <li>Custom Web Applications</li>
+                    </ul>
+                </div>
+                
+                <p style="margin-top: 15px;">Founded by Jahid Ansari, we've helped numerous businesses transform their digital presence with our innovative solutions and competitive pricing.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatMessages = document.getElementById('chat-messages');
+            const userInput = document.getElementById('user-input');
+            const sendButton = document.getElementById('send-btn');
+            const clearChatBtn = document.getElementById('clear-chat-btn');
+            const infoBtn = document.getElementById('info-btn');
+            const infoModal = document.getElementById('info-modal');
+            const closeModalButtons = document.querySelectorAll('.close-modal');
+            const darkModeToggle = document.getElementById('dark-mode-toggle');
+            const imageUpload = document.getElementById('image-upload');
+            const imagePreview = document.getElementById('image-preview');
+            const removeImageBtn = document.getElementById('remove-image-btn');
+            
+            // Updated configuration with new model
+            const apiKey = "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";
+            const currentModel = "google/gemma-2-9b-it:free"; // Free and fast model
+            const temperature = 0.7;
+            const maxTokens = 500;
+            
+            let currentImageData = null;
+            
+            // Check for saved dark mode preference
+            if (localStorage.getItem('darkMode') === 'enabled') {
+                document.body.classList.add('dark-mode');
+                darkModeToggle.classList.add('active');
+            }
+            
+            // Dark mode toggle functionality
+            darkModeToggle.addEventListener('click', function() {
+                document.body.classList.toggle('dark-mode');
+                darkModeToggle.classList.toggle('active');
+                
+                // Save preference
+                if (document.body.classList.contains('dark-mode')) {
+                    localStorage.setItem('darkMode', 'enabled');
+                } else {
+                    localStorage.setItem('darkMode', 'disabled');
+                }
+            });
+            
+            // Focus input on load (only once)
+            userInput.focus();
+            
+            // Manual focus when user clicks on input
+            userInput.addEventListener('click', function() {
+                userInput.focus();
+            });
+            
+            // Image upload functionality
+            imageUpload.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        imagePreview.src = event.target.result;
+                        imagePreview.style.display = 'block';
+                        removeImageBtn.style.display = 'flex';
+                        currentImageData = event.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+            
+            // Remove image functionality
+            removeImageBtn.addEventListener('click', function() {
+                imagePreview.style.display = 'none';
+                removeImageBtn.style.display = 'none';
+                imageUpload.value = '';
+                currentImageData = null;
+            });
+            
+            // Modal functionality
+            infoBtn.addEventListener('click', function() {
+                infoModal.style.display = 'flex';
+            });
+            
+            closeModalButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    infoModal.style.display = 'none';
+                });
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(event) {
+                if (event.target === infoModal) {
+                    infoModal.style.display = 'none';
+                }
+            });
+            
+            // Add event listeners
+            sendButton.addEventListener('click', function() {
+                userInput.focus(); // Focus when send button is clicked
+                sendMessage();
+            });
+            
+            // Send message on Enter key (but allow Shift+Enter for new line)
+            userInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                }
+            });
+            
+            // Clear chat button
+            clearChatBtn.addEventListener('click', function() {
+                if (confirm('Are you sure you want to clear the conversation?')) {
+                    chatMessages.innerHTML = '';
+                    addMessage('Conversation cleared. How can I help you learn about NexGenAiTech today? 😊', 'bot');
+                    // Add suggestion chips again after clearing
+                    setTimeout(addSuggestionChips, 100);
+                }
+            });
+            
+            // Suggestion chip functionality
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('suggestion-chip')) {
+                    const question = e.target.getAttribute('data-question');
+                    userInput.value = question;
+                    userInput.focus(); // Focus when suggestion is clicked
+                    sendMessage();
+                }
+            });
+            
+            // Function to add suggestion chips
+            function addSuggestionChips() {
+                const suggestionChips = document.createElement('div');
+                suggestionChips.classList.add('suggestion-chips');
+                
+                const questions = [
+                    "What is NexGenAiTech?",
+                    "Tell me about your services",
+                    "What is your pricing?",
+                    "How can I contact you?"
+                ];
+                
+                questions.forEach(question => {
+                    const chip = document.createElement('div');
+                    chip.classList.add('suggestion-chip');
+                    chip.setAttribute('data-question', question);
+                    chip.textContent = question;
+                    suggestionChips.appendChild(chip);
+                });
+                
+                // Add to the last bot message
+                const lastMessage = chatMessages.lastElementChild;
+                if (lastMessage && lastMessage.classList.contains('bot-message')) {
+                    lastMessage.querySelector('.message-content').appendChild(suggestionChips);
+                }
+            }
+            
+            // Function to add service buttons
+            function addServiceButtons() {
+                const serviceButtons = document.createElement('div');
+                serviceButtons.classList.add('program-buttons');
+                
+                const services = [
+                    { text: "Website Development", question: "Tell me about Website Development" },
+                    { text: "Graphic Designing", question: "What is Graphic Designing service?" },
+                    { text: "Digital Marketing", question: "Explain Digital Marketing service" },
+                    { text: "AI Automation", question: "What AI automation services do you offer?" }
+                ];
+                
+                services.forEach(service => {
+                    const button = document.createElement('button');
+                    button.classList.add('program-button');
+                    button.setAttribute('data-question', service.question);
+                    button.innerHTML = `<i class="fas fa-arrow-right"></i> ${service.text}`;
+                    serviceButtons.appendChild(button);
+                    
+                    // Add click event
+                    button.addEventListener('click', function() {
+                        userInput.value = service.question;
+                        userInput.focus(); // Focus when service button is clicked
+                        sendMessage();
+                    });
+                });
+                
+                // Add to the last bot message
+                const lastMessage = chatMessages.lastElementChild;
+                if (lastMessage && lastMessage.classList.contains('bot-message')) {
+                    lastMessage.querySelector('.message-content').appendChild(serviceButtons);
+                }
+            }
+            
+            // Enhanced algorithm for question processing
+            async function processQuestion(message, imageData) {
+                // If there's an image, use the image processing API
+                if (imageData) {
+                    try {
+                        const apiResponse = await getImageAIResponse(message, imageData);
+                        return { finalResponse: apiResponse, source: "api" };
+                    } catch (error) {
+                        console.error('API Error:', error);
+                        return { finalResponse: "Oops! I couldn't process the image. Please try again with a different image. 📸", source: "error" };
+                    }
+                }
+                
+                // Step 1: Analyze the question
+                const questionAnalysis = analyzeQuestion(message);
+                
+                // Step 2: Try to get response from NexGenAiTech knowledge base first
+                let response = getEnhancedNexGenAiTechResponse(message);
+                
+                // Step 3: If we need additional information, use the API directly
+                if (response.needAPI) {
+                    try {
+                        const apiResponse = await getContextualAIResponse(message, response.nexgenData);
+                        response = { finalResponse: apiResponse, source: "api" };
+                    } catch (error) {
+                        console.error('API Error:', error);
+                        // Fallback to NexGenAiTech-only response
+                        response = { finalResponse: response.nexgenData, source: "nexgen" };
+                    }
+                } else {
+                    response = { finalResponse: response.nexgenData, source: "nexgen" };
+                }
+                
+                return response;
+            }
+            
+            // Enhanced question analysis
+            function analyzeQuestion(message) {
+                const lowerMessage = message.toLowerCase();
+                const keywords = {
+                    about: ['what is', 'who is', 'tell me about', 'explain'],
+                    services: ['service', 'what do you offer', 'offerings', 'website development', 'graphic design', 'digital marketing', 'ai automation'],
+                    pricing: ['price', 'cost', 'how much', 'pricing', 'fee'],
+                    portfolio: ['portfolio', 'work', 'examples', 'projects'],
+                    contact: ['contact', 'join', 'enroll', 'phone', 'email', 'address'],
+                    team: ['team', 'founder', 'jahid', 'ansari']
+                };
+                
+                let category = 'general';
+                let urgency = 'normal';
+                
+                // Determine category
+                for (const [key, terms] of Object.entries(keywords)) {
+                    if (terms.some(term => lowerMessage.includes(term))) {
+                        category = key;
+                        break;
+                    }
+                }
+                
+                // Determine urgency
+                if (lowerMessage.includes('urgent') || lowerMessage.includes('emergency') || 
+                    lowerMessage.includes('asap') || lowerMessage.includes('important')) {
+                    urgency = 'high';
+                }
+                
+                return { category, urgency, originalQuestion: message };
+            }
+            
+            // Enhanced NexGenAiTech response with comprehensive knowledge
+            function getEnhancedNexGenAiTechResponse(message) {
+                const lowerMessage = message.toLowerCase();
+                let response = "";
+                let needAPI = false;
+                
+                // Comprehensive response logic based on content
+                if (lowerMessage.includes('what is') && lowerMessage.includes('nexgen')) {
+                    response = `NexGenAiTech is a premium digital solutions agency founded by Jahid Ansari, based in Jamsaria, Kushinagar, Uttar Pradesh, India. We specialize in helping businesses grow through cutting-edge technology, design, and marketing solutions. 🚀
+
+🎯 <strong>Our Mission:</strong> "To empower businesses with innovative digital solutions that drive growth and success."
+
+👁️ <strong>Our Vision:</strong> "To be the leading digital solutions provider, transforming businesses through technology and creativity."
+
+📋 <strong>What We Offer:</strong>
+- Custom Website Development 🌐
+- Professional Graphic Design 🎨
+- Strategic Digital Marketing 📈
+- AI-Powered Business Automation 🤖
+- E-Commerce Solutions 🛒
+- Custom Web Applications 💻
+
+We differentiate ourselves through our commitment to quality, competitive pricing, and personalized approach to each client's needs. Our services start at just ₹999, making premium digital solutions accessible to businesses of all sizes. 💫`;
+                } 
+                else if (lowerMessage.includes('service') || lowerMessage.includes('offer') || lowerMessage.includes('what do you')) {
+                    response = `NexGenAiTech offers a comprehensive range of premium digital services: 💼
+
+1. <strong>Website Development:</strong> Custom, responsive websites designed to convert visitors with modern technologies and premium UI/UX. Starting at ₹4,999 (was ₹15,000). 🌐
+
+2. <strong>Graphic Designing:</strong> Professional designs for logos, brochures, banners, and all visual branding needs with artistic excellence. Starting at ₹999 (was ₹15,000). 🎨
+
+3. <strong>Digital Marketing:</strong> Comprehensive SEO and advertising strategies to increase online visibility and drive conversions. Starting at ₹2,999/month (was ₹10,000). 📈
+
+4. <strong>AI Business Automation:</strong> Streamline operations with custom AI solutions that save time and reduce costs through automation. Starting at ₹4,999 (was ₹20,000). 🤖
+
+5. <strong>E-Commerce Setup:</strong> Complete online store setup with payment integration, inventory management, and premium features. Starting at ₹4,999 (was ₹15,000). 🛒
+
+6. <strong>Custom Web Applications:</strong> Tailored web applications designed to solve specific business challenges with advanced functionality. Starting at ₹4,999 (was ₹25,000). 💻
+
+Which service would you like to know more about? I'm excited to share details! 😊`;
+                }
+                else if (lowerMessage.includes('price') || lowerMessage.includes('cost') || lowerMessage.includes('how much')) {
+                    response = `Our competitive pricing (with current discounts) 💰:
+
+🏷️ <strong>Service Pricing:</strong>
+- <strong>Website Development:</strong> ₹4,999 (originally ₹15,000)
+- <strong>Graphic Designing:</strong> ₹999 (originally ₹15,000)
+- <strong>Digital Marketing:</strong> ₹2,999/month (originally ₹10,000)
+- <strong>AI Business Automation:</strong> ₹4,999 (originally ₹20,000)
+- <strong>E-Commerce Setup:</strong> ₹4,999 (originally ₹15,000)
+- <strong>Custom Web Applications:</strong> ₹4,999 (originally ₹25,000)
+
+⭐ <strong>Special Offers:</strong>
+- First-time clients receive an additional 10% discount 🎉
+- Free SEO audit with any website project 🔍
+- 3-month minimum commitment for marketing services
+
+All our services come with dedicated support and quality guarantees. Which service are you interested in? Let's make something amazing together! ✨`;
+                }
+                else if (lowerMessage.includes('portfolio') || lowerMessage.includes('work') || lowerMessage.includes('example')) {
+                    response = `Here are some highlights from our portfolio 🏆:
+
+<strong>Website Development:</strong>
+- Fashion eCommerce store with 300% sales growth 👗
+- Restaurant website generating 400% more reservations 🍽️
+- SaaS platform with 5x user increase 📊
+
+<strong>Digital Marketing:</strong>
+- Local business achieving 5x leads with Google Ads 📱
+- E-commerce store with 300% ROI from Facebook campaigns 💰
+- Service company with 80% traffic growth through SEO 📈
+
+<strong>AI Automation:</strong>
+- Chatbot reducing customer support costs by 60% 💬
+- Inventory prediction system with 98% accuracy 📦
+- Document processing automation saving 25+ hours/week ⏱️
+
+Would you like to see specific case studies for any of these services? I'd love to share more success stories! 📖`;
+                }
+                else if (lowerMessage.includes('contact') || lowerMessage.includes('reach') || lowerMessage.includes('get in touch')) {
+                    response = `We'd love to connect with you! Here's how you can reach us 📞:
+
+📧 Email: nexgenaitech@gmail.com
+📞 Phone: +91-8055698328
+📍 Address: Jamsaria, Kushinagar, Uttar Pradesh, India
+
+🌐 <strong>Social Media:</strong>
+- Instagram: @itz_bro_wasim
+- WhatsApp Channel: https://whatsapp.com/channel/0029Vb5YI1bJP213jsWV9w01
+- LinkedIn: NexGenAiTech Jahid Ansari
+
+💬 <strong>Preferred Contact Methods:</strong>
+1. WhatsApp for quick responses 💬
+2. Email for detailed project discussions 📧
+3. Phone calls for urgent matters 📞
+
+We typically respond within 2-4 hours during business days. Feel free to reach out with any questions! We're excited to hear from you! 😄`;
+                }
+                else if (lowerMessage.includes('team') || lowerMessage.includes('founder') || lowerMessage.includes('jahid')) {
+                    response = `NexGenAiTech was founded by <strong>Jahid Ansari</strong>, who leads our team of digital experts. 👨‍💼
+
+<strong>Our Approach:</strong>
+We believe in combining technical expertise with creative solutions to deliver exceptional results for our clients. Our team includes specialists in web development, design, marketing, and AI technologies.
+
+<strong>Why Choose Us:</strong>
+- <strong>Quality Focus:</strong> We don't compromise on quality, ensuring every project meets high standards ✨
+- <strong>Competitive Pricing:</strong> Premium services at accessible prices 💰
+- <strong>Personalized Approach:</strong> Tailored solutions for each client's unique needs 🎯
+- <strong>Ongoing Support:</strong> Continuous assistance even after project completion 🤝
+
+We're passionate about helping businesses succeed in the digital world! Let's build something amazing together! 🚀`;
+                }
+                else {
+                    // For questions not in our knowledge base, we'll need additional resources
+                    needAPI = true;
+                    response = "That's an interesting question! Let me consult our resources to give you the best answer. 📚";
+                }
+                
+                return { nexgenData: response, needAPI };
+            }
+            
+            // Contextual API call with NexGenAiTech-focused system message
+            async function getContextualAIResponse(message, nexgenContext) {
+                // Enhanced system message to focus only on NexGenAiTech
+                const systemMessage = `You are a helpful AI assistant exclusively for NexGenAiTech, a premium digital solutions agency based in Jamsaria, Kushinagar, Uttar Pradesh, India.
+
+Important guidelines:
+1. Only provide information about NexGenAiTech and its services, not any other companies.
+2. Always promote their services (website development, graphic design, digital marketing, AI automation, e-commerce, web applications) when relevant.
+3. If asked about other companies, clarify that you only have information about NexGenAiTech.
+4. Base your responses on the following context about NexGenAiTech:
+${nexgenContext}
+
+5. Be engaging, friendly, and provide detailed responses when appropriate.
+6. Highlight how their services can help businesses grow and succeed.
+7. Mention their competitive pricing and special offers when relevant.
+8. Use emojis sparingly to make the conversation more lively and engaging.
+9. Always maintain a professional yet friendly tone.
+10. End responses with a question or suggestion to keep the conversation flowing.`;
+
+                const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${apiKey}`,
+                        'HTTP-Referer': 'https://nexgenaitech.com',
+                        'X-Title': 'NexGenAiTech AI Assistant'
+                    },
+                    body: JSON.stringify({
+                        model: currentModel,
+                        messages: [
+                            { role: 'system', content: systemMessage },
+                            { role: 'user', content: message }
+                        ],
+                        temperature: temperature,
+                        max_tokens: maxTokens
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`API error: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                return data.choices[0].message.content;
+            }
+            
+            // Image processing API call
+            async function getImageAIResponse(message, imageData) {
+                const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+                    method: "POST",
+                    headers: {
+                        "Authorization": `Bearer ${apiKey}`,
+                        "HTTP-Referer": "https://nexgenaitech.com", 
+                        "X-Title": "NexGenAiTech AI Assistant",
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        "model": "google/gemini-flash-1.5:free", // Free and fast image model
+                        "messages": [
+                            {
+                                "role": "user",
+                                "content": [
+                                    {
+                                        "type": "text",
+                                        "text": message || "What is in this image?"
+                                    },
+                                    {
+                                        "type": "image_url",
+                                        "image_url": {
+                                            "url": imageData
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`API error: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                return data.choices[0].message.content;
+            }
+            
+            // Function to send a message
+            async function sendMessage() {
+                const message = userInput.value.trim();
+                const imageData = currentImageData;
+                
+                if (message === '' && !imageData) return;
+                
+                // Add user message to chat
+                addMessage(message, 'user', imageData);
+                
+                // Clear input and disable send button
+                userInput.value = '';
+                sendButton.disabled = true;
+                
+                // Clear image
+                if (imageData) {
+                    imagePreview.style.display = 'none';
+                    removeImageBtn.style.display = 'none';
+                    imageUpload.value = '';
+                    currentImageData = null;
+                }
+                
+                // Show typing indicator
+                showTypingIndicator();
+                
+                try {
+                    // Use the enhanced processing algorithm
+                    const response = await processQuestion(message, imageData);
+                    removeTypingIndicator();
+                    addMessage(response.finalResponse, 'bot');
+                    
+                    // Add appropriate badge based on source
+                    if (response.source === "nexgen") {
+                        addInfoBadge("From NexGenAiTech Knowledge Base");
+                    } else if (response.source === "api") {
+                        addInfoBadge("From NexGenAiTech-AI");
+                    }
+                    
+                    // If the message is about what NexGenAiTech is, add service buttons
+                    if (message.toLowerCase().includes('what is nexgen') || 
+                        message.toLowerCase().includes('about nexgen') ||
+                        message.toLowerCase().includes('service')) {
+                        setTimeout(addServiceButtons, 100);
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    removeTypingIndicator();
+                    addMessage('Oops! Something went wrong. Please try again. 🔄', 'bot');
+                } finally {
+                    sendButton.disabled = false;
+                }
+            }
+            
+            // Function to add info badge
+            function addInfoBadge(text) {
+                const badge = document.createElement('div');
+                badge.classList.add('info-badge');
+                badge.textContent = text;
+                
+                const lastMessage = chatMessages.lastElementChild;
+                if (lastMessage && lastMessage.classList.contains('bot-message')) {
+                    lastMessage.appendChild(badge);
+                }
+            }
+            
+            // Function to add a message to the chat
+            function addMessage(text, sender, imageData = null) {
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('message');
+                messageElement.classList.add(sender + '-message');
+                
+                const messageContent = document.createElement('div');
+                messageContent.classList.add('message-content');
+                
+                // Handle image if present
+                if (imageData && sender === 'user') {
+                    const imageElement = document.createElement('img');
+                    imageElement.src = imageData;
+                    imageElement.classList.add('message-image');
+                    messageContent.appendChild(imageElement);
+                }
+                
+                // Handle text if present
+                if (text && text.trim() !== '') {
+                    // Handle line breaks and basic formatting in the text
+                    const lines = text.split('\n');
+                    lines.forEach((line, index) => {
+                        if (line.trim() !== '') {
+                            // Check if line contains HTML tags (like <strong>)
+                            if (/<[a-z][\s\S]*>/i.test(line)) {
+                                messageContent.innerHTML += line + '<br>';
+                            } else {
+                                const messageText = document.createElement('p');
+                                messageText.innerHTML = line;
+                                messageContent.appendChild(messageText);
+                            }
+                        }
+                    });
+                }
+                
+                const timestamp = document.createElement('div');
+                timestamp.classList.add('timestamp');
+                timestamp.textContent = getCurrentTime();
+                
+                messageElement.appendChild(messageContent);
+                messageElement.appendChild(timestamp);
+                
+                chatMessages.appendChild(messageElement);
+                
+                // Scroll to bottom
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+            
+            // Function to show typing indicator
+            function showTypingIndicator() {
+                const typingElement = document.createElement('div');
+                typingElement.classList.add('typing-indicator');
+                typingElement.id = 'typing-indicator';
+                
+                for (let i = 0; i < 3; i++) {
+                    const dot = document.createElement('div');
+                    dot.classList.add('typing-dot');
+                    typingElement.appendChild(dot);
+                }
+                
+                chatMessages.appendChild(typingElement);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+            
+            // Function to remove typing indicator
+            function removeTypingIndicator() {
+                const typingElement = document.getElementById('typing-indicator');
+                if (typingElement) {
+                    typingElement.remove();
+                }
+            }
+            
+            // Function to get current time in HH:MM format
+            function getCurrentTime() {
+                const now = new Date();
+                return now.getHours().toString().padStart(2, '0') + ':' + 
+                       now.getMinutes().toString().padStart(2, '0');
+            }
+        });
+    </script>
+</body>
+</html>
