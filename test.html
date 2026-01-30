@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admission Form</title>
+    <style>
+        body { font-family: Arial; padding: 20px; max-width: 400px; margin: auto; }
+        input, button { width: 100%; padding: 10px; margin: 10px 0; font-size: 16px; }
+        button { background: blue; color: white; border: none; }
+    </style>
+</head>
+<body>
+    <h2>Student Admission</h2>
+    <form id="myForm">
+        <input type="text" id="studentName" placeholder="Student Name" required><br>
+        <input type="text" id="fatherName" placeholder="Father Name" required><br>
+        <input type="tel" id="mobile" placeholder="Mobile Number (10 digits)" required><br>
+        <button type="submit">Submit</button>
+    </form>
+    <p id="message"></p>
+
+    <script>
+        // REPLACE THIS URL with your deployed script URL
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzhbM2BTafUxTtIw_43iaUU5cZN8Lygvw00nWEO5elgd3KdSi6Rzyu2faEslwdJA2a8AA/exec";
+        
+        document.getElementById('myForm').onsubmit = async function(e) {
+            e.preventDefault();
+            
+            const data = {
+                studentName: document.getElementById('studentName').value,
+                fatherName: document.getElementById('fatherName').value,
+                mobile: document.getElementById('mobile').value
+            };
+            
+            // Simple validation
+            if(!/^\d{10}$/.test(data.mobile)) {
+                alert("Enter 10 digit mobile number");
+                return;
+            }
+            
+            document.getElementById('message').innerHTML = "Saving...";
+            
+            try {
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                document.getElementById('message').innerHTML = result.message;
+                document.getElementById('myForm').reset();
+            } catch(error) {
+                document.getElementById('message').innerHTML = "Error! Try again.";
+            }
+        };
+    </script>
+</body>
+</html>
